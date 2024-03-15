@@ -5,38 +5,48 @@ import { availablePlates, calculatePlates } from './utils/calculators';
 
 const App: Component = () => {
 
-  const [weight, setWeight] = createSignal(45);
-  const [plates, setPlates] = createSignal<Array<number>>([]);
+  const [weight, setWeight] = createSignal(95);
+  const [plates, setPlates] = createSignal<Array<string>>();
 
   createEffect(() => {
-    const {plates} = calculatePlates(weight());
+    const { plates } = calculatePlates(weight());
     setPlates(plates)
   });
 
-  console.log(plates);
-  
   const onKeyUp = (e) => {
-    setWeight(Number(e.target.value));
+    const newWeight = Number(e.target.value) > 9000 ? 9000 : Number(e.target.value);
+    console.log(newWeight);
+    
+    setWeight(newWeight);
   }
 
   return (
     <div class={styles.App}>
       <header class={styles.header}>
-        <input value={weight()} type="number" onKeyUp={onKeyUp} />
-        <h1>{weight()}</h1>
-        {plates().length > 0 && (
+        <p class={styles.emojiThing}>🏋️</p>
+        <input class={styles.bigInput} value={weight()} type="number" onKeyUp={onKeyUp} />
+        {weight() <= 45 && (
+          <p>Need <i>at least </i>45 lb 🏋️</p>
+        )}
+        {weight() === 9000 ? (
+          <p>IT'S OVER 9000!</p>
+        ) : weight() >= 1000 ? (
+          <p>WOAH DUDE!</p>
+        ) : weight() >= 400 ? (
+          <p>So strong...😏</p>
+        ) : null}
+        {plates() && (
           <div>
-            <p>Considering {JSON.stringify(availablePlates)} plates available...</p>
-            <p>You need:</p>
-            <ul>
-              {plates().map(p => (
-                <li>2 x {p}lb plates</li>
+            <small>Considering a 45(?) lb bar and<br /> {availablePlates.join(', ')} lb plates available <br /> you need</small>
+            <ul class={styles.ul}>
+              {plates()?.map(p => (
+                <li>{p}  per side</li>
               ))}
             </ul>
           </div>
         )}
       </header>
-    </div>
+    </div >
   );
 };
 

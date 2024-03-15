@@ -9,7 +9,7 @@
 }
 
 .header {
-  background-color: #282c34;
+  background-color: #203a6f;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -17,6 +17,22 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
+}
+
+ul {
+  padding-top: 30px;
+  list-style: none;
+}
+
+.emojiThing {
+  font-size: 50px;
+}
+
+.bigInput {
+  font-size: 40px;
+  width: 30%;
+  text-align: center;
+  margin-bottom: 30px;
 }
 
 .link {
