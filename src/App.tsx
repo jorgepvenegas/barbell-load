@@ -1,5 +1,4 @@
 import { createEffect, createSignal, type Component } from 'solid-js';
-
 import styles from './App.module.css';
 import { availablePlates, calculatePlates } from './utils/calculators';
 

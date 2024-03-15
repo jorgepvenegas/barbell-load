@@ -1,10 +1,11 @@
 /* @refresh reload */
 import { render } from 'solid-js/web';
-
+import { inject } from "@vercel/analytics"
 import './index.css';
 import App from './App';
 
 const root = document.getElementById('root');
+inject();
 
 if (import.meta.env.DEV && !(root instanceof HTMLElement)) {
   throw new Error(
