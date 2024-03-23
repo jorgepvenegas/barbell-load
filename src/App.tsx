@@ -8,12 +8,14 @@ const App: Component = () => {
 
   const [weight, setWeight] = createSignal(95);
   const [plates, setPlates] = createSignal<Array<PlatePair>>();
+  const [selectedPlates, setSelectedPlates] = createSignal(availablePlates)
   const [barWeight, setBarWeight] = createSignal<number>(45);
 
   createEffect(() => {
     const plates = calculatePlates({
       targetWeight: weight(),
-      barWeight: barWeight()
+      barWeight: barWeight(),
+      selectedPlates: selectedPlates(),
     });
     setPlates(plates)
   });
@@ -24,9 +26,26 @@ const App: Component = () => {
     setWeight(newWeight);
   }
 
+  const handlePlateCheckbox = (index: number) => {
+    const updatedSelectedPlantes = selectedPlates().map(({ enabled, weight }, i) => ({
+      enabled: index === i ? !enabled : enabled,
+      weight
+    }))
+
+    setSelectedPlates(updatedSelectedPlantes)
+  }
+
   return (
     <div class={styles.App}>
       <header class={styles.header}>
+        <div>
+          {selectedPlates().map(({ enabled, weight }, index) => (
+            <div>
+              <input type="checkbox" name={`${weight}-plate`} checked={enabled} onChange={() => handlePlateCheckbox(index)} />
+              <label for={`${weight}-plate`}>{`${weight} plate`}</label>
+            </div>
+          ))}
+        </div>
         <p class={styles.emojiThing}>🏋️</p>
         <select onChange={(e) => {
           setBarWeight(Number(e.target.value))
@@ -47,7 +66,7 @@ const App: Component = () => {
         ) : null}
         {plates() && (
           <div>
-            <small>Considering a {barWeight()}(?) lb bar and<br /> {availablePlates.join(', ')} lb plates available <br /> you need</small>
+            <small>Considering a {barWeight()}(?) lb bar and<br /> the  plates available <br /> you need</small>
             <ul class={styles.ul}>
               {plates()?.map(({ count, weight }) => (
                 <li>{count} plate(s) of {weight}lb per side</li>
