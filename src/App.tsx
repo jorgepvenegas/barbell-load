@@ -18,8 +18,9 @@ const App: Component = () => {
     setPlates(plates)
   });
 
-  const onKeyUp = (e) => {
-    const newWeight = Number(e.target.value) > 9000 ? 9000 : Number(e.target.value);
+  const onKeyUp = (event: KeyboardEvent) => {
+    const target = event.target as HTMLInputElement;
+    const newWeight = Number(target.value) > 9000 ? 9000 : Number(target.value);
     setWeight(newWeight);
   }
 
