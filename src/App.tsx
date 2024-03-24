@@ -54,9 +54,9 @@ const App: Component = () => {
           Customize plates
         </div>
         <div class="collapse-content">
-          <PlateSelector class="grid gap-2 grid-cols-4">
+          <PlateSelector class="grid gap-2 lg:grid-cols-4 grid-cols-3">
             {selectedPlates().map(({ enabled, weight }, index) => (
-              <button class="btn btn-success btn-block btn-lg h-24 w-24flex flex-col justify-center items-center no-animation" onClick={() => handlePlateCheckbox(index)}>
+              <button class="btn btn-accent btn-block btn-lg h-24 flex flex-col justify-center items-center no-animation text-white" onClick={() => handlePlateCheckbox(index)}>
                 <label for={`${weight}-plate`}>{`${weight} lb`}</label>
                 <input class="checkbox" type="checkbox" name={`${weight}-plate`} checked={enabled} />
               </button>
