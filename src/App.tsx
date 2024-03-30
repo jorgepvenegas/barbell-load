@@ -1,10 +1,9 @@
 import { createEffect, createSignal, type Component } from 'solid-js';
 import { PlatePair, availablePlates, calculatePlates } from './utils/calculators';
-import { styled } from "solid-styled-components";
 
 const App: Component = () => {
 
-  const [weight, setWeight] = createSignal(950);
+  const [weight, setWeight] = createSignal(95);
   const [plates, setPlates] = createSignal<Array<PlatePair>>();
   const [selectedPlates, setSelectedPlates] = createSignal(availablePlates)
   const [barWeight, setBarWeight] = createSignal<number>(45);
