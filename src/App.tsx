@@ -33,12 +33,12 @@ const App: Component = () => {
   }
 
   return (
-    <div class="container mx-auto w-full sm:max-w-2xl flex flex-col gap-3 min-h-screen justify-center">
-      <div class="mx-4 flex flex-col gap-4">
-        <h1 class="text-4xl mt-5">Barbell load calculator</h1>
-        <div class="collapse collapse-arrow  bg-base-200">
+    <div class="container mx-auto w-full sm:max-w-2xl flex flex-col gap-3 min-h-screen">
+      <div class="m-4 flex flex-col gap-4">
+        <h1 class="text-3xl">Barbell load calculator</h1>
+        <div class="collapse collapse-arrow bg-base-200 rounded">
           <input type="checkbox" />
-          <div class="collapse-title text-lg font-medium">
+          <div class="collapse-title text-md font-medium">
             Customize available plates
           </div>
           <div class="collapse-content">
@@ -54,9 +54,9 @@ const App: Component = () => {
         </div>
         <label class="form-control w-full">
           <div class="label">
-            <span class="label-text text-lg">Pick a bar</span>
+            <span class="label-text text-md font-semibold">Bar weight</span>
           </div>
-          <select class="select select-bordered w-full input-lg" onChange={(e) => {
+          <select class="select select-bordered w-full input-md rounded" onChange={(e) => {
             setBarWeight(Number(e.target.value))
           }}>
             <option value={35}>35lb</option>
@@ -66,17 +66,17 @@ const App: Component = () => {
 
         <label class="form-control w-full">
           <div class="label">
-            <span class="label-text text-lg">Target weight</span>
+            <span class="label-text text-md font-semibold">Target weight</span>
           </div>
-          <input class="input input-bordered w-full input-lg" value={weight()} type="number" min={45} max={9000} onKeyUp={onKeyUp} />
+          <input class="input input-bordered w-full input-md rounded" value={weight()} type="number" min={45} max={9000} onKeyUp={onKeyUp} />
         </label>
 
 
 
         {plates() && (
-          <div class="p-4 bg-base-200 rounded-box">
-            <h2 class="pb-3 text-2xl font-semibold">🏋️ You need</h2>
-            <ul class="list-disc px-4 text-xl">
+          <div class="p-4 bg-base-200 rounded">
+            <h2 class="pb-3 text-lg font-semibold">You need</h2>
+            <ul class="list-disc px-4 text-md">
               {plates()?.map(({ count, weight }) => (
                 <li>{count} plate(s) of {weight}lb per side</li>
               ))}
