@@ -4,23 +4,34 @@ import { PlatePair, availablePlates, calculatePlates } from './utils/calculators
 const App: Component = () => {
 
   const [weight, setWeight] = createSignal(95);
+  const [percentage, setPercentage] = createSignal(100);
+  const [percentageWeight, setPercentageWeight] = createSignal(weight());
   const [plates, setPlates] = createSignal<Array<PlatePair>>();
   const [selectedPlates, setSelectedPlates] = createSignal(availablePlates)
   const [barWeight, setBarWeight] = createSignal<number>(45);
 
   createEffect(() => {
+
+    const targetWeight = weight() * (percentage() / 100);
+
     const plates = calculatePlates({
-      targetWeight: weight(),
+      targetWeight,
       barWeight: barWeight(),
       selectedPlates: selectedPlates(),
     });
+    setPercentageWeight(targetWeight);
     setPlates(plates)
   });
 
-  const onKeyUp = (event: KeyboardEvent) => {
+  const handleWeightChange = (event: KeyboardEvent) => {
     const target = event.target as HTMLInputElement;
     const newWeight = Number(target.value) > 9000 ? 9000 : Number(target.value);
     setWeight(newWeight);
+  }
+
+  const handlePercentageChange = (event: KeyboardEvent) => {
+    const target = event.target as HTMLInputElement;
+    setPercentage(Number(target.value));
   }
 
   const handlePlateCheckbox = (index: number) => {
@@ -33,12 +44,12 @@ const App: Component = () => {
   }
 
   return (
-    <div class="container mx-auto w-full sm:max-w-2xl flex flex-col gap-3 min-h-screen justify-center">
-      <div class="mx-4 flex flex-col gap-4">
-        <h1 class="text-4xl mt-5">Barbell load calculator</h1>
-        <div class="collapse collapse-arrow  bg-base-200">
+    <div class="container mx-auto w-full sm:max-w-2xl flex flex-col gap-3 min-h-screen">
+      <div class="m-4 flex flex-col gap-4">
+        <h1 class="text-3xl mb-5">Barbell load calculator</h1>
+        <div class="collapse collapse-arrow bg-base-200 rounded">
           <input type="checkbox" />
-          <div class="collapse-title text-lg font-medium">
+          <div class="collapse-title text-md font-medium">
             Customize available plates
           </div>
           <div class="collapse-content">
@@ -52,31 +63,39 @@ const App: Component = () => {
             </div>
           </div>
         </div>
-        <label class="form-control w-full">
-          <div class="label">
-            <span class="label-text text-lg">Pick a bar</span>
-          </div>
-          <select class="select select-bordered w-full input-lg" onChange={(e) => {
-            setBarWeight(Number(e.target.value))
-          }}>
-            <option value={35}>35lb</option>
-            <option value={45} selected>45lb</option>
-          </select>
-        </label>
+        <div class="flex gap-4">
+          <label class="form-control basis-2/3">
+            <div class="label">
+              <span class="label-text text-md font-semibold">Bar weight</span>
+            </div>
+            <select class="select select-bordered w-full input-md rounded" onChange={(e) => {
+              setBarWeight(Number(e.target.value))
+            }}>
+              <option value={35}>35lb</option>
+              <option value={45} selected>45lb</option>
+            </select>
+          </label>
+          <label class="form-control basis-1/3">
+            <div class="label">
+              <span class="label-text text-md font-semibold">Target %</span>
+            </div>
+            <input class="input input-bordered input-md rounded" value={percentage()} type="number" min={1} max={100} onKeyUp={handlePercentageChange} />
+          </label>
+        </div>
 
         <label class="form-control w-full">
           <div class="label">
-            <span class="label-text text-lg">Target weight</span>
+            <span class="label-text text-md font-semibold">Target weight</span>
           </div>
-          <input class="input input-bordered w-full input-lg" value={weight()} type="number" min={45} max={9000} onKeyUp={onKeyUp} />
+          <input class="input input-bordered w-full input-md rounded" value={weight()} type="number" min={45} max={9000} onKeyUp={handleWeightChange} />
         </label>
 
 
 
         {plates() && (
-          <div class="p-4 bg-base-200 rounded-box">
-            <h2 class="pb-3 text-2xl font-semibold">🏋️ You need</h2>
-            <ul class="list-disc px-4 text-xl">
+          <div class="p-4 bg-base-200 rounded">
+            <h2 class="pb-3 text-lg font-semibold">For {percentageWeight()} you need</h2>
+            <ul class="list-disc px-4 text-md">
               {plates()?.map(({ count, weight }) => (
                 <li>{count} plate(s) of {weight}lb per side</li>
               ))}
