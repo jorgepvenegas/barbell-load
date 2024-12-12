@@ -9,7 +9,7 @@ export type PlateWeight = .25 | .5 | 1 | 2.5 | 5 | 10 | 15 | 25 | 35 | 45 | 55 |
 
 type Plates = Array<PlateWeight>;
 
-const plates: Plates = [65, 55, 45, 35, 25, 15, 10, 5, 2.5, 1, 0.5];
+const plates: Plates = [65, 55, 45, 35, 25, 15, 10, 5, 2.5, 1, 0.5, 0.25];
 
 export const availablePlates = plates.map(weight => ({
     enabled: true,
