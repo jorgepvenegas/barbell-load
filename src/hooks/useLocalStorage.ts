@@ -1,6 +1,4 @@
-import { createSignal } from "solid-js";
-
-import { createEffect } from "solid-js";
+import { createSignal, createEffect } from "solid-js";
 
 export const useLocalStorage = <T,>(key: string, initialValue: T) => {
   const [value, setValue] = createSignal<T>(
