@@ -5,12 +5,20 @@ import {
   calculatePlates,
 } from "./utils/calculators";
 
+const STORAGE_KEY = "selectedPlates";
+
 const App: Component = () => {
   const [weight, setWeight] = createSignal(65);
   const [percentage, setPercentage] = createSignal(100);
   const [percentageWeight, setPercentageWeight] = createSignal(weight());
   const [plates, setPlates] = createSignal<Array<PlatePair>>();
-  const [selectedPlates, setSelectedPlates] = createSignal(availablePlates);
+  const [selectedPlates, setSelectedPlates] = createSignal<
+    typeof availablePlates
+  >(
+    JSON.parse(
+      localStorage.getItem(STORAGE_KEY) ?? JSON.stringify(availablePlates)
+    )
+  );
   const [barWeight, setBarWeight] = createSignal<35 | 45>(45);
 
   createEffect(() => {
@@ -23,6 +31,10 @@ const App: Component = () => {
     });
     setPercentageWeight(targetWeight);
     setPlates(plates);
+  });
+
+  createEffect(() => {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(selectedPlates()));
   });
 
   const handlePercentageInputChange = (event: Event) => {
