@@ -131,14 +131,14 @@ const App: Component = () => {
         </div>
 
         <div class="flex gap-4 w-full">
-          <label class="form-control w-1/2">
+          <label class="form-control w-2/5">
             <div class="label">
               <span class="label-text text-lg font-semibold">
                 Target weight
               </span>
             </div>
             <input
-              class="input input-bordered input-lg rounded w-full text-2xl"
+              class="input input-bordered input-lg rounded w-full text-2xl px-4 text-center"
               value={weight()}
               type="number"
               min={45}
@@ -146,7 +146,7 @@ const App: Component = () => {
               onKeyUp={handleWeightChange}
             />
           </label>
-          <div class="form-control w-1/2">
+          <div class="form-control w-3/5">
             <div class="label">
               <span class="label-text text-lg font-semibold">Target %</span>
             </div>
@@ -159,7 +159,7 @@ const App: Component = () => {
                 -
               </button>
               <input
-                class="input input-bordered input-lg rounded join-item flex-1 min-w-0 text-2xl px-4"
+                class="input input-bordered input-lg rounded join-item flex-1 min-w-0 text-2xl px-4 text-center"
                 value={percentage()}
                 type="numeric"
                 min={1}
