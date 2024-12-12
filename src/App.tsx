@@ -1,4 +1,4 @@
-import { createEffect, createSignal, type Component } from "solid-js";
+import { createEffect, createSignal, Show, type Component } from "solid-js";
 import {
   PlatePair,
   availablePlates,
@@ -6,7 +6,7 @@ import {
 } from "./utils/calculators";
 
 const App: Component = () => {
-  const [weight, setWeight] = createSignal(95);
+  const [weight, setWeight] = createSignal(65);
   const [percentage, setPercentage] = createSignal(100);
   const [percentageWeight, setPercentageWeight] = createSignal(weight());
   const [plates, setPlates] = createSignal<Array<PlatePair>>();
@@ -25,15 +25,24 @@ const App: Component = () => {
     setPlates(plates);
   });
 
-  const handleWeightChange = (event: KeyboardEvent) => {
+  const handlePercentageInputChange = (event: Event) => {
     const target = event.target as HTMLInputElement;
-    const newWeight = Number(target.value) > 9000 ? 9000 : Number(target.value);
-    setWeight(newWeight);
+    const newValue = Number(target.value);
+
+    if (isNaN(newValue)) return;
+
+    const newPercentage = Math.min(Math.max(newValue, 70), 100);
+    setPercentage(newPercentage);
   };
 
-  const handlePercentageChange = (event: KeyboardEvent) => {
+  const handleWeightInputChange = (event: Event) => {
     const target = event.target as HTMLInputElement;
-    setPercentage(Number(target.value));
+    const newValue = Number(target.value);
+
+    if (isNaN(newValue)) return;
+
+    const newWeight = Math.min(Math.max(newValue, barWeight()), 1500);
+    setWeight(newWeight);
   };
 
   const handlePlateCheckbox = (index: number) => {
@@ -65,6 +74,8 @@ const App: Component = () => {
   const decrementPercentage = () => {
     setPercentage((prev) => prev - 5);
   };
+
+  console.log(plates());
 
   return (
     <div class="container mx-auto w-full sm:max-w-2xl min-h-screen">
@@ -141,9 +152,11 @@ const App: Component = () => {
               class="input input-bordered input-lg rounded w-full text-2xl px-4 text-center"
               value={weight()}
               type="number"
-              min={45}
-              max={9000}
-              onKeyUp={handleWeightChange}
+              inputmode="numeric"
+              pattern="[0-9]*"
+              min={barWeight()}
+              max={1500}
+              onChange={handleWeightInputChange}
             />
           </label>
           <div class="form-control w-3/5">
@@ -159,12 +172,14 @@ const App: Component = () => {
                 -
               </button>
               <input
-                class="input input-bordered input-lg rounded join-item flex-1 min-w-0 text-2xl px-4 text-center"
+                class="input input-bordered input-lg rounded join-item flex-1 min-w-0 text-2xl px-4 text-center bg-white cursor-default disabled:opacity-100 disabled:bg-white"
                 value={percentage()}
-                type="numeric"
-                min={1}
+                type="number"
+                inputmode="numeric"
+                pattern="[0-9]*"
+                min={70}
                 max={100}
-                onKeyUp={handlePercentageChange}
+                onChange={handlePercentageInputChange}
               />
               <button
                 disabled={increaseButtonDisabled()}
@@ -177,18 +192,23 @@ const App: Component = () => {
           </div>
         </div>
 
-        {plates() && (
-          <div class="p-4 bg-base-200 rounded">
-            <h2 class="pb-3 text-xl font-semibold">You'll need</h2>
-            <ul class="list-disc px-4 text-md">
+        <div class="p-4 bg-base-200 rounded">
+          <h2 class="pb-3 text-xl font-semibold">
+            For {percentageWeight()}lb you'll need:
+          </h2>
+          <Show when={plates()}>
+            <ul class="list-disc px-4 text-md text-lg">
               {plates()?.map(({ count, weight }) => (
                 <li>
                   {count} plate(s) of {weight}lb per side
                 </li>
               ))}
             </ul>
-          </div>
-        )}
+          </Show>
+          <Show when={plates()?.length === 0}>
+            <p class="text-lg">Just the barbell 😀</p>
+          </Show>
+        </div>
       </div>
     </div>
   );
