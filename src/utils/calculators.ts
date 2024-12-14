@@ -4,7 +4,7 @@ type PlateAggregator = {
     plateSet: Map<PlateWeight, number>; // weight, count
 }
 
-export type BarWeight = 35 | 45;
+export type BarWeight = 33 | 45;
 export type PlateWeight = .25 | .5 | 1 | 2.5 | 5 | 10 | 15 | 25 | 35 | 45 | 55 | 65;
 
 type Plates = Array<PlateWeight>;

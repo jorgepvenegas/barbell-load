@@ -14,13 +14,13 @@ export const BarWeightSelector: Component<{
       <div class="collapse-content">
         <div class="form-control">
           <label class="label cursor-pointer">
-            <span class="label-text">35lb</span>
+            <span class="label-text">33lb</span>
             <input
-              onClick={() => props.onBarWeightChange(35)}
+              onClick={() => props.onBarWeightChange(33)}
               type="radio"
               name="radio-10"
               class="radio checked:bg-red-500"
-              checked={props.barWeight() === 35}
+              checked={props.barWeight() === 33}
             />
           </label>
         </div>

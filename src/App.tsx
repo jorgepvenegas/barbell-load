@@ -1,6 +1,5 @@
 import { createEffect, createSignal, Show, type Component } from "solid-js";
-import { availablePlates } from "./utils/calculators";
-import { BarWeight } from "./utils/types";
+import { availablePlates, BarWeight } from "./utils/calculators";
 import { useWeightCalculator } from "./hooks/useWeightCalculator";
 import {
   MAX_PERCENTAGE,
