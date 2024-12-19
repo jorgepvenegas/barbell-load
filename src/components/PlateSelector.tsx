@@ -8,7 +8,7 @@ export const PlateSelector: Component<{
   return (
     <div class="collapse collapse-arrow bg-base-200 rounded">
       <input type="checkbox" />
-      <div class="collapse-title text-md font-medium">Plates</div>
+      <div class="collapse-title text-md font-medium">Plates available</div>
       <div class="collapse-content">
         <div class="grid gap-2 sm:grid-cols-4 grid-cols-4">
           {props.selectedPlates().map(({ enabled, weight }, index) => (
