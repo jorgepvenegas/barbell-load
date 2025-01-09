@@ -1,10 +1,17 @@
-import { Component, Show } from "solid-js";
+import { Component, createEffect, createMemo, Show } from "solid-js";
 import { PlatePair } from "../utils/calculators";
 
 export const PlateResults: Component<{
   percentageWeight: () => number;
   plates: () => Array<PlatePair> | undefined;
+  weight: () => number;
+  barWeight: () => number;
 }> = (props) => {
+  
+  const isLessThanTheBarbell = createMemo(() => {
+    return props.percentageWeight() < props.barWeight();
+  });
+
   return (
     <div class="p-4 bg-base-200 rounded">
       <h2 class="pb-3 text-xl font-semibold">
@@ -20,7 +27,13 @@ export const PlateResults: Component<{
         </ul>
       </Show>
       <Show when={props.plates()?.length === 0}>
-        <p class="text-lg">Just the barbell 😀</p>
+        <p class="text-lg">
+          Just the barbell
+          😀
+        </p>
+      </Show>
+      <Show when={isLessThanTheBarbell()}>
+        <small>(that's not even the barbell weight but that's okay!)</small>
       </Show>
     </div>
   );

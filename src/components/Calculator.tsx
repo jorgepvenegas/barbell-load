@@ -105,7 +105,12 @@ const Calculator: Component = () => {
           decrementButtonDisabled={decrementButtonDisabled}
         />
 
-        <PlateResults percentageWeight={percentageWeight} plates={plates} />
+        <PlateResults
+          percentageWeight={percentageWeight}
+          plates={plates}
+          weight={weight}
+          barWeight={barWeight}
+        />
       </div>
     </div>
   );
