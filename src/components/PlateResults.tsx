@@ -1,19 +1,25 @@
 import { Component, createMemo, Show } from "solid-js";
 import { useStore } from "../stores/store";
-import { useWeightCalculator } from "../hooks/useWeightCalculator";
+import { calculatePlates } from "../utils/calculators";
 
 export const PlateResults: Component = () => {
   const store = useStore();
-  const { percentageWeight, plates } = useWeightCalculator();
+  const plates = createMemo(() =>
+    calculatePlates({
+      targetWeight: store.weight * (store.percentage / 100),
+      barWeight: store.barWeight,
+      selectedPlates: store.selectedPlates,
+    })
+  );
 
   const isLessThanTheBarbell = createMemo(() => {
-    return percentageWeight() < store.barWeight;
+    return store.percentageWeight && store.percentageWeight < store.barWeight;
   });
 
   return (
     <div class="p-4 bg-base-200 rounded">
       <h2 class="pb-3 text-xl font-semibold">
-        For {percentageWeight()}lb you'll need:
+        For {store.percentageWeight}lb you'll need:
       </h2>
       <Show when={plates()}>
         <ul class="list-disc px-4 text-md text-lg">

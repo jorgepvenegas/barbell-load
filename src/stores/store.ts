@@ -2,13 +2,13 @@ import { createStore } from "solid-js/store";
 import { createRoot } from "solid-js";
 import { availablePlates, BarWeight } from "../utils/calculators";
 import { STORAGE_KEY } from "../utils/constants";
-import { useLocalStorage } from "../hooks/useLocalStorage";
+import { useLocalStorage } from "../utils/useLocalStorage";
 
 // Define types for our store
 type StoreState = {
   weight: number;
   percentage: number;
-  percentageWeight?: number;
+  percentageWeight: number;
   barWeight: BarWeight;
   selectedPlates: typeof availablePlates;
 };
@@ -27,6 +27,7 @@ const initialState: StoreState = {
   percentage: 100,
   barWeight: 45,
   selectedPlates: useLocalStorage<typeof availablePlates>(STORAGE_KEY, availablePlates),
+  percentageWeight: 65,
 };
   
 // Create the store with actions
