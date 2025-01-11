@@ -1,16 +1,13 @@
 import { createSignal, createEffect } from "solid-js";
 import {
-  availablePlates,
   PlatePair,
   calculatePlates,
 } from "../utils/calculators";
 import { useStore } from "../stores/store";
 
-export const useWeightCalculator = (
-  selectedPlates: () => typeof availablePlates
-) => {
-
+export const useWeightCalculator = () => {
   const store = useStore();
+  // TODO: Do we need to use signals here?
   const [percentageWeight, setPercentageWeight] = createSignal(store.weight);
   const [plates, setPlates] = createSignal<Array<PlatePair>>();
 
@@ -19,7 +16,7 @@ export const useWeightCalculator = (
     const calculatedPlates = calculatePlates({
       targetWeight,
       barWeight: store.barWeight,
-      selectedPlates: selectedPlates(),
+      selectedPlates: store.selectedPlates,
     });
 
     setPercentageWeight(targetWeight);

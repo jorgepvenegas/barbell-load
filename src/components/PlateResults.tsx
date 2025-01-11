@@ -1,15 +1,10 @@
 import { Component, createMemo, Show } from "solid-js";
-import { availablePlates } from "../utils/calculators";
 import { useStore } from "../stores/store";
 import { useWeightCalculator } from "../hooks/useWeightCalculator";
 
-export const PlateResults: Component<{
-  selectedPlates: () => typeof availablePlates;
-}> = (props) => {
+export const PlateResults: Component = () => {
   const store = useStore();
-  const { percentageWeight, plates } = useWeightCalculator(
-    props.selectedPlates
-  );
+  const { percentageWeight, plates } = useWeightCalculator();
 
   const isLessThanTheBarbell = createMemo(() => {
     return percentageWeight() < store.barWeight;
