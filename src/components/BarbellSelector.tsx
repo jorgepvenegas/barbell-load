@@ -1,11 +1,7 @@
 import { Component } from "solid-js";
-import { BarWeight } from "../utils/calculators";
 import { useStore, useStoreActions } from "../stores/store";
 
-export const BarWeightSelector: Component<{
-  // barWeight: BarWeight;
-  // onBarWeightChange: (weight: BarWeight) => void;
-}> = (props) => {
+export const BarbellSelector: Component = () => {
   const { setBarWeight } = useStoreActions();
   const store = useStore();
 

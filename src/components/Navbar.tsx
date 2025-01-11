@@ -11,7 +11,7 @@ const Navbar: Component = () => {
       </li>
       <li>
         <A activeClass="active" href="/plates">
-          By plate
+          By Plate
         </A>
       </li>
     </ul>
