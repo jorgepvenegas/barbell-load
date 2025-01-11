@@ -1,25 +1,24 @@
 import { createSignal, createEffect } from "solid-js";
 import {
   availablePlates,
-  BarWeight,
   PlatePair,
   calculatePlates,
 } from "../utils/calculators";
+import { useStore } from "../stores/store";
 
 export const useWeightCalculator = (
-  weight: () => number,
-  percentage: () => number,
-  barWeight: () => BarWeight,
   selectedPlates: () => typeof availablePlates
 ) => {
-  const [percentageWeight, setPercentageWeight] = createSignal(weight());
+
+  const store = useStore();
+  const [percentageWeight, setPercentageWeight] = createSignal(store.weight);
   const [plates, setPlates] = createSignal<Array<PlatePair>>();
 
   createEffect(() => {
-    const targetWeight = weight() * (percentage() / 100);
+    const targetWeight = store.weight * (store.percentage / 100);
     const calculatedPlates = calculatePlates({
       targetWeight,
-      barWeight: barWeight(),
+      barWeight: store.barWeight,
       selectedPlates: selectedPlates(),
     });
 

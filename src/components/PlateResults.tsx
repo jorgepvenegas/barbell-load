@@ -1,36 +1,36 @@
-import { Component, createEffect, createMemo, Show } from "solid-js";
-import { PlatePair } from "../utils/calculators";
+import { Component, createMemo, Show } from "solid-js";
+import { availablePlates } from "../utils/calculators";
+import { useStore } from "../stores/store";
+import { useWeightCalculator } from "../hooks/useWeightCalculator";
 
 export const PlateResults: Component<{
-  percentageWeight: () => number;
-  plates: () => Array<PlatePair> | undefined;
-  weight: () => number;
-  barWeight: () => number;
+  selectedPlates: () => typeof availablePlates;
 }> = (props) => {
-  
+  const store = useStore();
+  const { percentageWeight, plates } = useWeightCalculator(
+    props.selectedPlates
+  );
+
   const isLessThanTheBarbell = createMemo(() => {
-    return props.percentageWeight() < props.barWeight();
+    return percentageWeight() < store.barWeight;
   });
 
   return (
     <div class="p-4 bg-base-200 rounded">
       <h2 class="pb-3 text-xl font-semibold">
-        For {props.percentageWeight()}lb you'll need:
+        For {percentageWeight()}lb you'll need:
       </h2>
-      <Show when={props.plates()}>
+      <Show when={plates()}>
         <ul class="list-disc px-4 text-md text-lg">
-          {props.plates()?.map(({ count, weight }) => (
+          {plates()?.map(({ count, weight }) => (
             <li>
               {count} plate(s) of {weight}lb per side
             </li>
           ))}
         </ul>
       </Show>
-      <Show when={props.plates()?.length === 0}>
-        <p class="text-lg">
-          Just the barbell
-          😀
-        </p>
+      <Show when={plates()?.length === 0}>
+        <p class="text-lg">Just the barbell 😀</p>
       </Show>
       <Show when={isLessThanTheBarbell()}>
         <small>(that's not even the barbell weight but that's okay!)</small>
