@@ -8,13 +8,15 @@ Barbell Load Calculator is a Solid.js web application that helps users calculate
 
 ## Tech Stack
 
-- **Framework**: Solid.js (reactivity library, not React)
-- **Language**: TypeScript
-- **Build Tool**: Vite
-- **Styling**: Tailwind CSS + DaisyUI
-- **Routing**: @solidjs/router
+- **Framework**: Solid.js 1.9.10 (reactivity library, not React)
+- **Language**: TypeScript 5.9.3
+- **Build Tool**: Vite 5.4.21
+- **Styling**: Tailwind CSS 4.1.17 + DaisyUI 5.4.7
+- **Routing**: @solidjs/router 0.15.3
 - **State Management**: Solid.js store with createStore
 - **Package Manager**: pnpm
+- **Analytics**: Vercel Analytics 1.5.0
+- **Vite Plugin**: vite-plugin-solid 2.11.10
 
 ## Development Commands
 
@@ -73,24 +75,30 @@ The app uses Solid.js `createStore` for state management:
 ### Key Files and Their Responsibilities
 
 **Core Calculation Logic** (`src/utils/calculators.ts`):
+
 - `calculatePlates()`: Main algorithm that distributes plates to reach target weight
 - `availablePlates`: Array of plate weights (65, 55, 45, 35, 25, 15, 10, 5, 2.5, 1, 0.5, 0.25)
 - Types: `BarWeight` (33 | 45), `PlateWeight`, `PlatePair`
 
 **Routing** (`src/App.tsx`):
+
 - Route `/`: Calculator component (main view)
 - Route `/plates`: Plates component (plate configuration/visualization)
 
 **Styling**:
-- Tailwind CSS + DaisyUI classes for styling
-- PostCSS + Autoprefixer for vendor prefixes
-- Configuration in `tailwind.config.js` and `postcss.config.js`
+
+- Tailwind CSS v4 + DaisyUI classes for styling
+- PostCSS configured with @tailwindcss/postcss plugin
+- Tailwind v4 uses new import syntax via `@import 'tailwindcss'` and `@plugin` directives
+- Border color compatibility layer added for Tailwind v4 (default changed from explicit colors to currentcolor)
+- Configuration in `postcss.config.js` (tailwind.config.js removed in v4)
 
 ## Important Development Notes
 
 ### Solid.js Specifics
 
 - **Not React**: This is Solid.js, not React. Key differences:
+
   - No hooks like `useState`, but uses `createSignal`, `createStore`
   - Components are functions that return JSX but don't re-render on state changes (fine-grained reactivity)
   - JSX imports from `"solid-js"` (configured in `jsxImportSource` in tsconfig.json)
@@ -102,6 +110,7 @@ The app uses Solid.js `createStore` for state management:
 ### Plate Calculation Algorithm
 
 The `calculatePlates()` function in `src/utils/calculators.ts`:
+
 - Takes target weight, bar weight, and selected plates (filtered by enabled status)
 - Uses a greedy algorithm: iterates through largest to smallest plates
 - For each plate weight, adds pairs (left + right side) until remaining weight is less than 2x the plate weight

@@ -17,7 +17,7 @@ export const PlateResults: Component = () => {
   });
 
   return (
-    <div class="p-4 bg-base-200 rounded">
+    <div class="p-4 bg-base-200 rounded-sm">
       <h2 class="pb-3 text-xl font-semibold">
         For {store.percentageWeight}lb you'll need:
       </h2>
