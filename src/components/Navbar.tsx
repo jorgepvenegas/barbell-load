@@ -3,7 +3,7 @@ import { Component } from "solid-js";
 
 const Navbar: Component = () => {
   return (
-    <ul class="menu menu-horizontal lg:menu-horizontal bg-base-200 rounded">
+    <ul class="menu menu-horizontal lg:menu-horizontal bg-base-200 rounded-sm">
       <li>
         <A activeClass="active" href="/" end>
           Home

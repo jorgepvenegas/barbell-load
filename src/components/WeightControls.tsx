@@ -54,7 +54,7 @@ export const WeightControls: Component = () => {
           <span class="label-text text-lg font-semibold">Target weight</span>
         </div>
         <input
-          class="input input-bordered input-lg rounded w-full text-2xl px-4 text-center"
+          class="input input-bordered input-lg rounded-sm w-full text-2xl px-4 text-center"
           value={store.weight}
           type="number"
           inputmode="numeric"
@@ -70,7 +70,7 @@ export const WeightControls: Component = () => {
         </div>
         <div class="join w-full h-12 text-xl">
           <button
-            class="btn join-item btn-lg text-xl rounded"
+            class="btn join-item btn-lg text-xl rounded-sm"
             disabled={decrementButtonDisabled()}
             onClick={() => {
               updatePercentageWeight(store.percentage - PERCENTAGE_STEP);
@@ -79,7 +79,7 @@ export const WeightControls: Component = () => {
             -
           </button>
           <input
-            class="input input-bordered input-lg rounded join-item flex-1 min-w-0 text-2xl px-4 text-center bg-white cursor-default disabled:opacity-100 disabled:bg-white"
+            class="input input-lg rounded-sm  flex-1 min-w-0 text-2xl px-4 text-center cursor-default disabled:opacity-100 disabled:bg-white"
             value={store.percentage}
             type="number"
             inputmode="numeric"
@@ -90,7 +90,7 @@ export const WeightControls: Component = () => {
           />
           <button
             disabled={increaseButtonDisabled()}
-            class="btn join-item btn-lg text-xl rounded"
+            class="btn join-item btn-lg text-xl rounded-sm"
             onClick={() => {
               updatePercentageWeight(store.percentage + PERCENTAGE_STEP);
             }}

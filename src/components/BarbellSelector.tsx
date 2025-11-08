@@ -6,12 +6,12 @@ export const BarbellSelector: Component = () => {
   const store = useStore();
 
   return (
-    <div class="collapse collapse-arrow bg-base-200 rounded">
+    <div class="collapse collapse-arrow bg-base-200 rounded-sm">
       <input type="checkbox" />
       <div class="collapse-title text-md font-medium">
         Barbell ({store.barWeight}lb)
       </div>
-      <div class="collapse-content">
+      <div class="collapse-content flex gap-5">
         <div class="form-control">
           <label class="label cursor-pointer">
             <span class="label-text">33lb</span>

@@ -40,9 +40,9 @@ const Plates: Component = () => {
         </h1>
         <BarbellSelector />
         <div class="sticky top-2 z-10">
-          <div class="p-4 bg-yellow-100 rounded-lg shadow-md backdrop-blur-sm">
+          <div class="p-4 rounded-lg bg-base-200 border-2">
             <p class="text-xl font-bold">Total Weight: {totalWeight()}lbs</p>
-            <p class="text-sm text-gray-600">
+            <p class="text-sm">
               (Including {store.barWeight}lb barbell)
             </p>
           </div>
@@ -50,12 +50,12 @@ const Plates: Component = () => {
         <div class="grid grid-cols-2 lg:grid-cols-3 gap-4">
           <For each={availablePlates}>
             {(plate) => (
-              <div class="flex flex-col items-center justify-between px-2 py-4 bg-gray-100 rounded-lg gap-5">
+              <div class="flex flex-col items-center justify-between px-2 py-4 bg-base-300 rounded gap-5">
                 <span class="text-lg font-medium">{plate.weight}lb plate</span>
                 <div class="flex items-center gap-1">
                   <button
                     onClick={() => handleDecrement(plate.weight)}
-                    class="px-3 py-1 bg-red-500 text-white rounded-md hover:bg-red-600 disabled:opacity-50"
+                    class="px-3 py-1 bg-warning text-white rounded-md hover:bg-red-600 disabled:opacity-50"
                     disabled={plateCounts()[plate.weight] === 0}
                     aria-label={`Decrease ${plate.weight}lb plates`}
                   >
@@ -66,7 +66,7 @@ const Plates: Component = () => {
                   </span>
                   <button
                     onClick={() => handleIncrement(plate.weight)}
-                    class="px-3 py-1 bg-green-500 text-white rounded-md hover:bg-green-600"
+                    class="px-3 py-1 bg-success text-white rounded-md hover:bg-green-600"
                     aria-label={`Increase ${plate.weight}lb plates`}
                   >
                     +
