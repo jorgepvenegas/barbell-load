@@ -1,16 +1,16 @@
 import { createSignal, createEffect, createRoot } from "solid-js";
 
 // Theme types
-export type Theme = "temita" | "carbonsocks";
+export type Theme = "emerald" | "carbonsocks";
 
 const THEME_STORAGE_KEY = "barbell-theme";
 
 // Get initial theme from localStorage or default to light
 const getInitialTheme = (): Theme => {
-  if (typeof window === "undefined") return "temita";
+  if (typeof window === "undefined") return "emerald";
 
   const stored = localStorage.getItem(THEME_STORAGE_KEY);
-  if (stored === "temita" || stored === "carbonsocks") {
+  if (stored === "emerald" || stored === "carbonsocks") {
     return stored;
   }
 
@@ -19,7 +19,7 @@ const getInitialTheme = (): Theme => {
     return "carbonsocks";
   }
 
-  return "temita";
+  return "emerald";
 };
 
 // Apply theme to document
@@ -43,7 +43,7 @@ const createThemeStore = () => {
   });
 
   const toggleTheme = () => {
-    setTheme((prev) => (prev === "temita" ? "carbonsocks" : "temita"));
+    setTheme((prev) => (prev === "emerald" ? "carbonsocks" : "emerald"));
   };
 
   const isDark = () => theme() === "carbonsocks";
