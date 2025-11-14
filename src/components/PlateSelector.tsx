@@ -24,7 +24,7 @@ export const PlateSelector: Component = () => {
         <div class="grid gap-2 sm:grid-cols-4 grid-cols-4">
           {store.selectedPlates.map(({ enabled, weight }, index) => (
             <button
-              class="btn bg-base-300 hover:bg-base-100 btn-block px-5 btn-lg h-24 flex flex-col justify-center items-center no-animation text-white font-normal"
+              class="btn bg-base-300 hover:bg-base-100 btn-block px-5 btn-lg h-24 flex flex-col justify-center items-center no-animation text-base-content font-normal"
               onClick={() => handlePlateCheckbox(index)}
             >
               <label for={`${weight}-plate`}>{`${weight} lb`}</label>
