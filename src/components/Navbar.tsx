@@ -1,18 +1,20 @@
-import { A } from "@solidjs/router";
+import { A, useLocation } from "@solidjs/router";
 import { Component } from "solid-js";
 import ThemeToggle from "./ThemeToggle";
 
 const Navbar: Component = () => {
+  const location = useLocation();
+
   return (
     <div class="flex items-center justify-between gap-4">
       <ul class="menu menu-horizontal lg:menu-horizontal bg-base-200 rounded-sm">
-        <li>
-          <A activeClass="active" href="/" end>
+        <li classList={{ active: location.pathname === "/" }}>
+          <A href="/">
             Home
           </A>
         </li>
-        <li>
-          <A activeClass="active" href="/plates">
+        <li classList={{ active: location.pathname === "/plates" }}>
+          <A href="/plates">
             By Plate
           </A>
         </li>
