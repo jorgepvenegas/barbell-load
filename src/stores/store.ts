@@ -1,7 +1,12 @@
 import { createStore } from "solid-js/store";
-import { createRoot } from "solid-js";
+import { createRoot, createEffect } from "solid-js";
 import { availablePlates, BarWeight } from "../utils/calculators";
-import { STORAGE_KEY } from "../utils/constants";
+import {
+  STORAGE_KEY,
+  WEIGHT_STORAGE_KEY,
+  PERCENTAGE_STORAGE_KEY,
+  BAR_WEIGHT_STORAGE_KEY
+} from "../utils/constants";
 import { useLocalStorage } from "../utils/useLocalStorage";
 
 // Define types for our store
@@ -23,11 +28,11 @@ type StoreActions = {
 };
 
 const initialState: StoreState = {
-  weight: 65,
-  percentage: 100,
-  barWeight: 45,
+  weight: useLocalStorage<number>(WEIGHT_STORAGE_KEY, 65),
+  percentage: useLocalStorage<number>(PERCENTAGE_STORAGE_KEY, 100),
+  barWeight: useLocalStorage<BarWeight>(BAR_WEIGHT_STORAGE_KEY, 45),
   selectedPlates: useLocalStorage<typeof availablePlates>(STORAGE_KEY, availablePlates),
-  percentageWeight: 65,
+  percentageWeight: useLocalStorage<number>(WEIGHT_STORAGE_KEY, 65),
 };
   
 // Create the store with actions
@@ -44,7 +49,7 @@ const createCustomStore = () => {
     setPercentage: (percentage: number) => {
       setState("percentage", percentage);
     },
-    setPercentageWeight: (percentageWeight: number) => {    
+    setPercentageWeight: (percentageWeight: number) => {
       setState("percentageWeight", percentageWeight);
     },
     setBarWeight: (barWeight: BarWeight) => {
@@ -54,6 +59,23 @@ const createCustomStore = () => {
       setState("selectedPlates", selectedPlates);
     },
   };
+
+  // Persist state changes to localStorage
+  createEffect(() => {
+    localStorage.setItem(WEIGHT_STORAGE_KEY, JSON.stringify(state.weight));
+  });
+
+  createEffect(() => {
+    localStorage.setItem(PERCENTAGE_STORAGE_KEY, JSON.stringify(state.percentage));
+  });
+
+  createEffect(() => {
+    localStorage.setItem(BAR_WEIGHT_STORAGE_KEY, JSON.stringify(state.barWeight));
+  });
+
+  createEffect(() => {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(state.selectedPlates));
+  });
 
   return { state, actions };
 };
