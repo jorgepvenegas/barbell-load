@@ -44,20 +44,24 @@ npm run serve
 src/
 ├── components/          # Solid.js components for UI
 │   ├── Calculator.tsx   # Main calculator page
-│   ├── plates/          # Plate visualization page
+│   ├── plates/          # Plate visualization components
+│   │   └── Plates.tsx   # Plate configuration/visualization page
 │   ├── PlateSelector.tsx # Component for selecting available plates
 │   ├── BarbellSelector.tsx # Component for selecting barbell weight (33lb or 45lb)
 │   ├── WeightControls.tsx # Input controls for weight/percentage
 │   ├── PlateResults.tsx # Display calculated plate distribution
-│   └── Navbar.tsx       # Navigation component
+│   ├── Navbar.tsx       # Navigation component with theme toggle
+│   └── ThemeToggle.tsx  # Dark/light mode toggle component
 ├── stores/
-│   └── store.ts         # Solid.js store with createStore (state management)
+│   ├── store.ts         # Main app store with createStore (calculator state)
+│   └── themeStore.ts    # Theme store with createSignal (dark/light mode)
 ├── utils/
 │   ├── calculators.ts   # Core plate calculation logic
 │   ├── constants.ts     # App constants (storage keys, etc)
 │   └── useLocalStorage.ts # Local storage persistence utility
 ├── App.tsx              # Router setup (Calculator and Plates routes)
-└── index.tsx            # Entry point
+├── index.tsx            # Entry point
+└── index.css            # Global styles, Tailwind imports, custom DaisyUI theme
 ```
 
 ### State Management Pattern
@@ -72,6 +76,26 @@ The app uses Solid.js `createStore` for state management:
 - **State includes**: weight, percentage, barWeight (33 or 45), selectedPlates, percentageWeight
 - **Persistence**: selectedPlates persist to localStorage via `useLocalStorage()` hook
 
+### Theme System
+
+The app includes a dark/light mode theme system:
+
+- **Theme store location**: `src/stores/themeStore.ts` (themeStore.ts:32)
+- **Theme types**: `"emerald"` (light mode) | `"carbonsocks"` (dark mode)
+- **Store exports**:
+  - `ThemeStore`: Singleton instance created with `createRoot`
+  - `useTheme()`: Get current theme
+  - `useIsDark()`: Check if dark mode is active
+  - `useToggleTheme()`: Toggle between light/dark
+  - `useSetTheme()`: Set specific theme
+- **Implementation details**:
+  - Uses `createSignal` for reactive theme state
+  - Applies theme via `data-theme` attribute on document root
+  - Persists to localStorage with key `"barbell-theme"`
+  - Detects system preference on initial load
+  - Custom "carbonsocks" theme defined in `src/index.css` (index.css:4-37)
+- **UI Component**: `ThemeToggle.tsx` integrated in `Navbar.tsx` (Navbar.tsx:22)
+
 ### Key Files and Their Responsibilities
 
 **Core Calculation Logic** (`src/utils/calculators.ts`):
@@ -85,13 +109,18 @@ The app uses Solid.js `createStore` for state management:
 - Route `/`: Calculator component (main view)
 - Route `/plates`: Plates component (plate configuration/visualization)
 
-**Styling**:
+**Styling** (`src/index.css`):
 
 - Tailwind CSS v4 + DaisyUI classes for styling
 - PostCSS configured with @tailwindcss/postcss plugin
 - Tailwind v4 uses new import syntax via `@import 'tailwindcss'` and `@plugin` directives
+- DaisyUI themes:
+  - `emerald`: Built-in DaisyUI theme for light mode
+  - `carbonsocks`: Custom dark theme defined in index.css:4-37
+- Custom theme defined using `@plugin "daisyui/theme"` directive with custom OKLCH color values
 - Border color compatibility layer added for Tailwind v4 (default changed from explicit colors to currentcolor)
 - Configuration in `postcss.config.js` (tailwind.config.js removed in v4)
+- Touch action manipulation applied globally for better mobile UX
 
 ## Important Development Notes
 
@@ -107,6 +136,15 @@ The app uses Solid.js `createStore` for state management:
 - **Store patterns**: Use `useStore()` and `useStoreActions()` from `src/stores/store.ts` to access state and mutations
 - **Local storage**: Already integrated in store for selectedPlates via `useLocalStorage()` hook
 
+### Theme System Implementation
+
+- **Pattern**: Uses `createSignal` with `createRoot` for singleton pattern (themeStore.ts:60)
+- **Why createRoot**: Ensures the theme store is created outside component lifecycle, making it a true singleton that persists across route changes
+- **Theme switching**: Directly access `ThemeStore.toggleTheme()` or use exported hooks
+- **localStorage integration**: Automatic via `createEffect` that watches theme changes (themeStore.ts:39-43)
+- **System preference detection**: Uses `window.matchMedia("(prefers-color-scheme: dark)")` on initialization
+- **DOM integration**: Applies theme by setting `data-theme` attribute on `document.documentElement`
+
 ### Plate Calculation Algorithm
 
 The `calculatePlates()` function in `src/utils/calculators.ts`:
@@ -121,3 +159,12 @@ The `calculatePlates()` function in `src/utils/calculators.ts`:
 - Strict mode enabled
 - JSX preserved and sourced from solid-js
 - No emit (type checking only, build handled by Vite)
+
+### DaisyUI Theme Customization
+
+- **Built-in theme**: Uses DaisyUI's `emerald` theme for light mode (no customization needed)
+- **Custom theme**: "carbonsocks" dark theme defined in `src/index.css` using Tailwind v4 plugin syntax
+- **Theme definition syntax**: Use `@plugin "daisyui/theme"` with configuration object
+- **Color format**: OKLCH color space for consistent perceptual brightness
+- **Theme properties**: Includes base colors, primary/secondary/accent, semantic colors (info/success/warning/error), border radius, and visual effects (noise, depth)
+- **Applying themes**: DaisyUI reads `data-theme` attribute from HTML element (set by themeStore)
