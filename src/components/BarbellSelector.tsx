@@ -6,17 +6,17 @@ export const BarbellSelector: Component = () => {
   const store = useStore();
 
   return (
-    <fieldset class="collapse collapse-arrow bg-base-200 rounded-sm">
+    <fieldset class="collapse collapse-arrow border-2 border-primary">
       <legend class="sr-only">Barbell Weight Selection</legend>
       <input
         type="checkbox"
         aria-label="Toggle barbell weight options"
         aria-controls="barbell-options"
       />
-      <div class="collapse-title text-sm sm:text-md font-medium">
+      <div class="collapse-title text-lg">
         Barbell ({store.barWeight}lb)
       </div>
-      <div id="barbell-options" class="collapse-content flex gap-3 sm:gap-5">
+      <div id="barbell-options" class="collapse-content flex gap-4">
         <div class="form-control">
           <label class="label cursor-pointer">
             <span class="label-text">33lb</span>

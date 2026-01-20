@@ -1,25 +1,28 @@
 import { createSignal, createEffect, createRoot } from "solid-js";
 
-// Theme types
-export type Theme = "emerald" | "carbonsocks";
+
+const LIGHT_MODE = "kesaen";
+const DARK_MODE = "coffee";
+
+export type Theme = typeof LIGHT_MODE | typeof DARK_MODE;
 
 const THEME_STORAGE_KEY = "barbell-theme";
 
 // Get initial theme from localStorage or default to light
 const getInitialTheme = (): Theme => {
-  if (typeof window === "undefined") return "emerald";
+  if (typeof window === "undefined") return LIGHT_MODE;
 
   const stored = localStorage.getItem(THEME_STORAGE_KEY);
-  if (stored === "emerald" || stored === "carbonsocks") {
-    return stored;
+  if (stored === LIGHT_MODE || stored === DARK_MODE) {
+    return stored as Theme;
   }
 
   // Check user's system preference
   if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
-    return "carbonsocks";
+    return DARK_MODE;
   }
 
-  return "emerald";
+  return LIGHT_MODE;
 };
 
 // Apply theme to document
@@ -43,10 +46,10 @@ const createThemeStore = () => {
   });
 
   const toggleTheme = () => {
-    setTheme((prev) => (prev === "emerald" ? "carbonsocks" : "emerald"));
+    setTheme((prev) => (prev === LIGHT_MODE ? DARK_MODE : LIGHT_MODE));
   };
 
-  const isDark = () => theme() === "carbonsocks";
+  const isDark = () => theme() === DARK_MODE;
 
   return {
     theme,
