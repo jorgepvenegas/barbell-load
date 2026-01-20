@@ -48,13 +48,13 @@ export const WeightControls: Component = () => {
   });
 
   return (
-    <div class="flex gap-4 w-full">
-      <label class="form-control w-2/5">
+    <div class="flex flex-col sm:flex-row gap-3 sm:gap-4 w-full">
+      <label class="form-control w-full sm:w-2/5">
         <div class="label">
-          <span class="label-text text-lg font-semibold">Target weight</span>
+          <span class="label-text text-base sm:text-lg font-semibold">Target weight</span>
         </div>
         <input
-          class="input input-bordered input-lg rounded-sm w-full text-2xl px-4 text-center"
+          class="input input-bordered input-md sm:input-lg rounded-sm w-full text-xl sm:text-2xl px-4 text-center"
           value={store.weight}
           type="number"
           inputmode="numeric"
@@ -62,24 +62,27 @@ export const WeightControls: Component = () => {
           min={store.barWeight}
           max={MAX_WEIGHT}
           onChange={handleWeightInputChange}
+          aria-label="Target weight in pounds"
         />
       </label>
-      <div class="form-control w-3/5">
-        <div class="label">
-          <span class="label-text text-lg font-semibold">Target %</span>
-        </div>
-        <div class="join w-full h-12 text-xl">
+      <fieldset class="form-control w-full sm:w-3/5">
+        <legend class="label">
+          <span class="label-text text-base sm:text-lg font-semibold">Target %</span>
+        </legend>
+        <div class="join w-full h-10 sm:h-12 text-base sm:text-xl">
           <button
-            class="btn join-item btn-lg text-xl rounded-sm"
+            class="btn join-item btn-md sm:btn-lg text-base sm:text-xl rounded-sm"
             disabled={decrementButtonDisabled()}
             onClick={() => {
               updatePercentageWeight(store.percentage - PERCENTAGE_STEP);
             }}
+            aria-label="Decrease percentage by 5%"
+            title="Decrease percentage"
           >
             -
           </button>
           <input
-            class="input input-lg rounded-sm  flex-1 min-w-0 text-2xl px-4 text-center cursor-default disabled:opacity-100 disabled:bg-white"
+            class="input input-md sm:input-lg rounded-sm  flex-1 min-w-0 text-xl sm:text-2xl px-4 text-center cursor-default disabled:opacity-100 disabled:bg-white"
             value={store.percentage}
             type="number"
             inputmode="numeric"
@@ -87,18 +90,21 @@ export const WeightControls: Component = () => {
             min={MIN_PERCENTAGE}
             max={MAX_PERCENTAGE}
             onChange={handlePercentageInputChange}
+            aria-label="Target percentage"
           />
           <button
             disabled={increaseButtonDisabled()}
-            class="btn join-item btn-lg text-xl rounded-sm"
+            class="btn join-item btn-md sm:btn-lg text-base sm:text-xl rounded-sm"
             onClick={() => {
               updatePercentageWeight(store.percentage + PERCENTAGE_STEP);
             }}
+            aria-label="Increase percentage by 5%"
+            title="Increase percentage"
           >
             +
           </button>
         </div>
-      </div>
+      </fieldset>
     </div>
   );
 };
