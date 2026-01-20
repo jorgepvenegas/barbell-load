@@ -22,18 +22,18 @@ Barbell Load Calculator is a Solid.js web application that helps users calculate
 
 ```bash
 # Install dependencies
-npm install
+pnpm install
 
 # Start development server (runs on http://localhost:3000)
-npm run dev
+pnpm dev
 # or
-npm start
+pnpm start
 
 # Build for production
-npm run build
+pnpm build
 
 # Preview production build locally
-npm run serve
+pnpm serve
 ```
 
 ## Project Architecture
@@ -127,7 +127,6 @@ The app includes a dark/light mode theme system:
 ### Solid.js Specifics
 
 - **Not React**: This is Solid.js, not React. Key differences:
-
   - No hooks like `useState`, but uses `createSignal`, `createStore`
   - Components are functions that return JSX but don't re-render on state changes (fine-grained reactivity)
   - JSX imports from `"solid-js"` (configured in `jsxImportSource` in tsconfig.json)

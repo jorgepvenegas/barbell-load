@@ -1,34 +1,49 @@
+# Barbell Load Calculator
+
+A Solid.js web application that helps weightlifters calculate the optimal plate distribution for barbell exercises. Enter your target weight, select available plates, and instantly see how to load each side of the bar.
+
+## Features
+
+- Select available plate weights
+- Choose barbell type and weight
+- Input target weight for your exercise
+- Calculate plate distribution for each side of the bar
+- Light and dark theme support
+
+## Tech Stack
+
+- Solid.js 1.9.10
+- TypeScript 5.9.3
+- Vite 5.4.21
+- Tailwind CSS 4.1.17
+- DaisyUI 5.4.7
+- pnpm
+
 ## Usage
 
-Those templates dependencies are maintained via [pnpm](https://pnpm.io) via `pnpm up -Lri`.
-
-This is the reason you see a `pnpm-lock.yaml`. That being said, any package manager will work. This file can be safely be removed once you clone a template.
-
+Install dependencies:
 ```bash
-$ npm install # or pnpm install or yarn install
+pnpm install
 ```
-
-### Learn more on the [Solid Website](https://solidjs.com) and come chat with us on our [Discord](https://discord.com/invite/solidjs)
 
 ## Available Scripts
 
-In the project directory, you can run:
+### `pnpm dev` or `pnpm start`
 
-### `npm run dev` or `npm start`
-
-Runs the app in the development mode.<br>
+Runs the app in development mode.
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The page will reload if you make edits.<br>
+The page will reload if you make edits.
 
-### `npm run build`
+### `pnpm build`
 
-Builds the app for production to the `dist` folder.<br>
-It correctly bundles Solid in production mode and optimizes the build for the best performance.
+Builds the app for production to the `dist` folder.
+The build is minified and the filenames include hashes.
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
+### `pnpm serve`
+
+Previews the production build locally.
 
 ## Deployment
 
-You can deploy the `dist` folder to any static host provider (netlify, surge, now, etc.)
+Deploy the `dist` folder to any static hosting provider (Netlify, Vercel, Surge, etc.).
