@@ -17,7 +17,7 @@ export const PlateResults: Component = () => {
   });
 
   return (
-    <div class="p-3 sm:p-4 bg-base-200 rounded-sm">
+    <div class="p-3 sm:p-4 bg-amber-100 border-2 border-amber-300">
       <h2 class="pb-2 sm:pb-3 text-lg sm:text-xl font-semibold">
         For {store.percentageWeight.toFixed(2)}lb you'll need:
       </h2>
