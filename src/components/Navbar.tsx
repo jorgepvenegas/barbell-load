@@ -6,8 +6,8 @@ const Navbar: Component = () => {
   const location = useLocation();
 
   return (
-    <div class="flex items-center justify-between gap-4">
-      <ul class="menu menu-horizontal lg:menu-horizontal bg-base-200 rounded-sm">
+    <div class="flex items-center justify-between gap-2 sm:gap-4 w-full bg-base-200">
+      <ul class="menu menu-horizontal text-sm sm:text-base flex-1">
         <li classList={{ active: location.pathname === "/" }}>
           <A href="/">
             Home
@@ -19,7 +19,9 @@ const Navbar: Component = () => {
           </A>
         </li>
       </ul>
-      <ThemeToggle />
+      <div class="pr-3 sm:pr-4">
+        <ThemeToggle />
+      </div>
     </div>
   );
 };

@@ -32,41 +32,42 @@ const Plates: Component = () => {
   };
 
   return (
-    <div class="container mx-auto w-full sm:max-w-2xl min-h-screen">
-      <div class="mx-4 pt-4 flex flex-col gap-5">
-        <Navbar />
-        <h1 class="text-3xl">
+    <>
+      <Navbar />
+      <div class="container mx-auto max-w-full sm:max-w-2xl min-h-screen">
+        <div class="mx-3 sm:mx-4 pt-3 sm:pt-4 pb-6 flex flex-col gap-4 sm:gap-5">
+        <h1 class="text-2xl sm:text-3xl">
           Calculate by plate <small class="text-sm">(experimental)</small>
         </h1>
         <BarbellSelector />
         <div class="sticky top-2 z-10">
-          <div class="p-4 rounded-lg bg-base-200 border-2">
-            <p class="text-xl font-bold">Total Weight: {totalWeight()}lbs</p>
-            <p class="text-sm">
+          <div class="p-3 sm:p-4 rounded-lg bg-base-200 border-2">
+            <p class="text-lg sm:text-xl font-bold">Total Weight: {totalWeight()}lbs</p>
+            <p class="text-xs sm:text-sm">
               (Including {store.barWeight}lb barbell)
             </p>
           </div>
         </div>
-        <div class="grid grid-cols-2 lg:grid-cols-3 gap-4">
+        <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4">
           <For each={availablePlates}>
             {(plate) => (
-              <div class="flex flex-col items-center justify-between px-2 py-4 bg-base-300 rounded gap-5">
-                <span class="text-lg font-medium">{plate.weight}lb plate</span>
-                <div class="flex items-center gap-1">
+              <div class="flex flex-col items-center justify-between px-2 sm:px-3 py-3 sm:py-4 bg-base-300 rounded gap-3 sm:gap-4">
+                <span class="text-base sm:text-lg font-medium">{plate.weight}lb plate</span>
+                <div class="flex items-center gap-2 sm:gap-3">
                   <button
                     onClick={() => handleDecrement(plate.weight)}
-                    class="px-3 py-1 bg-warning text-white rounded-md hover:bg-red-600 disabled:opacity-50"
+                    class="px-2 sm:px-3 py-1 text-sm sm:text-base bg-warning text-white rounded-md hover:bg-red-600 disabled:opacity-50"
                     disabled={plateCounts()[plate.weight] === 0}
                     aria-label={`Decrease ${plate.weight}lb plates`}
                   >
                     -
                   </button>
-                  <span class="w-8 text-center">
+                  <span class="w-6 sm:w-8 text-center text-sm sm:text-base">
                     {plateCounts()[plate.weight]}
                   </span>
                   <button
                     onClick={() => handleIncrement(plate.weight)}
-                    class="px-3 py-1 bg-success text-white rounded-md hover:bg-green-600"
+                    class="px-2 sm:px-3 py-1 text-sm sm:text-base bg-success text-white rounded-md hover:bg-green-600"
                     aria-label={`Increase ${plate.weight}lb plates`}
                   >
                     +
@@ -76,8 +77,9 @@ const Plates: Component = () => {
             )}
           </For>
         </div>
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

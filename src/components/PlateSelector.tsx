@@ -19,12 +19,12 @@ export const PlateSelector: Component = () => {
   return (
     <div class="collapse collapse-arrow bg-base-200 rounded-sm">
       <input type="checkbox" />
-      <div class="collapse-title text-md font-medium">Plates available</div>
+      <div class="collapse-title text-sm sm:text-md font-medium">Plates available</div>
       <div class="collapse-content">
-        <div class="grid gap-2 sm:grid-cols-4 grid-cols-4">
+        <div class="grid gap-2 grid-cols-2 sm:grid-cols-3 md:grid-cols-4">
           {store.selectedPlates.map(({ enabled, weight }, index) => (
             <button
-              class="btn bg-base-300 hover:bg-base-100 btn-block px-5 btn-lg h-24 flex flex-col justify-center items-center no-animation text-base-content font-normal"
+              class="btn bg-base-300 hover:bg-base-100 btn-block px-3 sm:px-5 btn-md sm:btn-lg h-20 sm:h-24 flex flex-col justify-center items-center no-animation text-base-content font-normal"
               onClick={() => handlePlateCheckbox(index)}
             >
               <label for={`${weight}-plate`}>{`${weight} lb`}</label>
