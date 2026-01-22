@@ -41,34 +41,36 @@ const Plates: Component = () => {
         </h1>
         <BarbellSelector />
         <div class="sticky top-2 z-10">
-          <div class="p-3 sm:p-4 rounded-lg border-2">
-            <p class="text-lg sm:text-xl font-bold">Total Weight: {totalWeight()}lbs</p>
-            <p class="text-xs sm:text-sm">
-              (Including {store.barWeight}lb barbell)
-            </p>
+          <div class="card card-compact bg-primary text-primary-content">
+            <div class="card-body">
+              <p class="text-lg sm:text-xl font-bold">Total Weight: {totalWeight()}lbs</p>
+              <p class="text-xs sm:text-sm opacity-80">
+                (Including {store.barWeight}lb barbell)
+              </p>
+            </div>
           </div>
         </div>
         <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4">
           <For each={availablePlates}>
             {(plate) => (
-              <div class="flex flex-col card card-xs shadow-sm">
+              <div class="flex flex-col card card-compact bg-base-200">
                 <div class="card-body items-center text-center">
                   <span class="text-base sm:text-lg font-medium">{plate.weight}lb plate</span>
                   <div class="flex items-center gap-2 sm:gap-3">
                     <button
                       onClick={() => handleDecrement(plate.weight)}
-                      class="btn btn-info sm:p-4 text-white"
+                      class="btn btn-sm btn-primary"
                       disabled={plateCounts()[plate.weight] === 0}
                       aria-label={`Decrease ${plate.weight}lb plates`}
                     >
                       -
                     </button>
-                    <span class="w-6 sm:w-8 text-center text-sm sm:text-base">
+                    <span class="w-6 sm:w-8 text-center text-sm sm:text-base font-medium">
                       {plateCounts()[plate.weight]}
                     </span>
                     <button
                       onClick={() => handleIncrement(plate.weight)}
-                      class="btn btn-info sm:p-4 text-white"
+                      class="btn btn-sm btn-primary"
                       aria-label={`Increase ${plate.weight}lb plates`}
                     >
                       +

@@ -17,23 +17,16 @@ export const PlateSelector: Component = () => {
   };
 
   return (
-    <div class="collapse collapse-arrow border-2 border-primary">
-      <input type="checkbox" />
-      <div class="collapse-title text-lg">Plates available</div>
-      <div class="collapse-content">
+    <div class="card card-compact bg-base-200">
+      <div class="card-body">
+        <h2 class="card-title text-lg">Plates available</h2>
         <div class="grid gap-2 grid-cols-3">
           {store.selectedPlates.map(({ enabled, weight }, index) => (
             <button
-              class="btn bg-base btn-block px-3 btn-md h-20 flex justify-center items-center no-animation text-base-content"
+              class={`btn btn-sm ${enabled ? "btn-primary" : "btn-outline"}`}
               onClick={() => handlePlateCheckbox(index)}
             >
-              <input
-                class="checkbox checkbox-sm"
-                type="checkbox"
-                name={`${weight}-plate`}
-                checked={enabled}
-              />
-              <label for={`${weight}-plate`}>{`${weight} lb`}</label>
+              {weight} lb
             </button>
           ))}
         </div>
