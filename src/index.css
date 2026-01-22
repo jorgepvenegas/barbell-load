@@ -39,6 +39,12 @@
   --noise: 0;
 }
 
+:root[data-theme="coffee"] {
+  --radius-selector: 0.5rem;
+  --radius-field: 0.25rem;
+  --radius-box: 0.25rem;
+}
+
 
 /*
   The default border color has changed to `currentcolor` in Tailwind CSS v4,
