@@ -1,13 +1,39 @@
-import { type Component, For, createSignal } from "solid-js";
-import { availablePlates } from "../../utils/calculators";
+import { type Component, For, createSignal, createMemo, createEffect } from "solid-js";
 import { TabBar } from "../TabBar";
 import { useStore } from "../../stores/store";
+import type { PlateWeight } from "../../utils/calculators";
 
 const Plates: Component = () => {
   const store = useStore();
-  const [plateCounts, setPlateCounts] = createSignal(
-    Object.fromEntries(availablePlates.map((plate) => [plate.weight, 0]))
+
+  const enabledPlates = createMemo(() =>
+    store.selectedPlates.filter(({ enabled }) => enabled)
   );
+
+  const [plateCounts, setPlateCounts] = createSignal(
+    Object.fromEntries(enabledPlates().map((plate) => [plate.weight, 0]))
+  );
+
+  createEffect(() => {
+    const currentEnabledWeights = new Set(
+      enabledPlates().map(p => p.weight)
+    );
+    setPlateCounts(prev => {
+      const newCounts = { ...prev };
+      Object.keys(newCounts).forEach(weight => {
+        const numWeight = Number(weight) as PlateWeight;
+        if (!currentEnabledWeights.has(numWeight)) {
+          delete newCounts[weight];
+        }
+      });
+      enabledPlates().forEach(plate => {
+        if (!(plate.weight in newCounts)) {
+          newCounts[plate.weight] = 0;
+        }
+      });
+      return newCounts;
+    });
+  });
 
   const totalWeight = () => {
     const plateWeight = Object.entries(plateCounts()).reduce(
@@ -46,13 +72,29 @@ const Plates: Component = () => {
           </button>
         </header>
 
+        <section aria-labelledby="result-heading">
+          <div class="flex flex-col gap-4 w-full">
+            <h2 id="result-heading" class="text-xl font-bold font-jakarta text-primary-color">
+              Total Weight
+            </h2>
+            <div class="flex flex-col gap-3 rounded-3xl p-6 bg-teal">
+              <div class="text-[34px] font-extrabold font-jakarta text-white-color">
+                {totalWeight()} lb
+              </div>
+              <div class="text-[13px] font-medium font-inter" style="color: rgba(255, 255, 255, 0.7);">
+                {store.barWeight} lb Olympic Bar + Plates
+              </div>
+            </div>
+          </div>
+        </section>
+
         <section aria-labelledby="plate-input-heading">
           <div class="flex flex-col gap-4 w-full">
             <h2 id="plate-input-heading" class="text-xl font-bold font-jakarta text-primary-color">
               Plates Per Side
             </h2>
             <div class="flex flex-col gap-4 rounded-3xl p-6 bg-card">
-              <For each={availablePlates}>
+              <For each={enabledPlates()}>
                 {(plate) => (
                   <div class="flex items-center justify-between w-full">
                     <span class="text-base font-semibold font-inter text-primary-color">
@@ -88,25 +130,9 @@ const Plates: Component = () => {
             </div>
           </div>
         </section>
-
-        <section aria-labelledby="result-heading">
-          <div class="flex flex-col gap-4 w-full">
-            <h2 id="result-heading" class="text-xl font-bold font-jakarta text-primary-color">
-              Total Weight
-            </h2>
-            <div class="flex flex-col gap-3 rounded-3xl p-6 bg-teal">
-              <div class="text-[34px] font-extrabold font-jakarta text-white-color">
-                {totalWeight()} lb
-              </div>
-              <div class="text-[13px] font-medium font-inter" style="color: rgba(255, 255, 255, 0.7);">
-                {store.barWeight} lb Olympic Bar + Plates
-              </div>
-            </div>
-          </div>
-        </section>
       </main>
 
-      <div class="fixed bottom-0 left-0 right-0 px-6 pb-6 pointer-events-none">
+      <div class="fixed bottom-0 left-0 right-0 px-6 py-3 pointer-events-none glass border-0">
         <div class="container mx-auto max-w-full sm:max-w-2xl pointer-events-auto">
           <TabBar />
         </div>

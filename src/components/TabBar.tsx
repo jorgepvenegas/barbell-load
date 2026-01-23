@@ -36,7 +36,7 @@ export const TabBar: Component = () => {
           />
         </svg>
         <span
-          class="text-[10px] font-semibold font-inter"
+          class="text-[13px] font-semibold font-inter"
           classList={{
             "text-purple": isActive("/"),
             "text-tertiary-color": !isActive("/"),
@@ -69,7 +69,7 @@ export const TabBar: Component = () => {
           />
         </svg>
         <span
-          class="text-[10px] font-medium font-inter"
+          class="text-[13px] font-medium font-inter"
           classList={{
             "text-purple": isActive("/plates"),
             "text-tertiary-color": !isActive("/plates"),
@@ -103,7 +103,7 @@ export const TabBar: Component = () => {
           <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
         </svg>
         <span
-          class="text-[10px] font-inter"
+          class="text-[13px] font-inter"
           classList={{
             "font-semibold text-purple": isActive("/settings"),
             "font-medium text-tertiary-color": !isActive("/settings"),

@@ -37,7 +37,7 @@ const Calculator: Component = () => {
         </section>
       </main>
 
-      <div class="fixed bottom-0 left-0 right-0 px-6 pb-6 pointer-events-none">
+      <div class="fixed bottom-0 left-0 right-0 px-6 py-3 pointer-events-none glass border-0">
         <div class="container mx-auto max-w-full sm:max-w-2xl pointer-events-auto">
           <TabBar />
         </div>
