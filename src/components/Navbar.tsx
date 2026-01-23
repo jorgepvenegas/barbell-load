@@ -19,6 +19,11 @@ const Navbar: Component = () => {
               By Plate
             </A>
           </li>
+          <li classList={{ active: location.pathname === "/find-gym" }}>
+            <A href="/find-gym">
+              Find Gym
+            </A>
+          </li>
         </ul>
       </div>
       <div class="navbar-end">

@@ -22,7 +22,9 @@
   },
   "dependencies": {
     "@solidjs/router": "^0.15.4",
+    "@types/leaflet": "^1.9.21",
     "@vercel/analytics": "^1.6.1",
+    "leaflet": "^1.9.4",
     "solid-js": "^1.9.10"
   }
 }
