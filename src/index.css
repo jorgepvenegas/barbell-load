@@ -67,3 +67,82 @@
 * {
   touch-action: manipulation;
 }
+
+:root {
+  --accent-purple: #8B5CF6;
+  --accent-teal: #14B8A6;
+  --accent-pink: #F472B6;
+  --card-bg: #F4F4F5;
+  --elevated-bg: #E4E4E7;
+  --page-bg: #FFFFFF;
+  --text-primary: #18181B;
+  --text-secondary: #71717A;
+  --text-tertiary: #A1A1AA;
+  --text-muted: #D4D4D8;
+  --white: #FFFFFF;
+  --border: #E4E4E7;
+}
+
+@font-face {
+  font-family: 'Plus Jakarta Sans';
+  font-style: normal;
+  font-weight: 400 800;
+  font-display: swap;
+  src: url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+}
+
+@utility font-jakarta {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+@utility font-inter {
+  font-family: 'Inter', sans-serif;
+}
+
+@utility text-primary-color {
+  color: var(--text-primary);
+}
+
+@utility text-secondary-color {
+  color: var(--text-secondary);
+}
+
+@utility text-tertiary-color {
+  color: var(--text-tertiary);
+}
+
+@utility text-white-color {
+  color: var(--white);
+}
+
+@utility bg-card {
+  background-color: var(--card-bg);
+}
+
+@utility bg-elevated {
+  background-color: var(--elevated-bg);
+}
+
+@utility bg-page {
+  background-color: var(--page-bg);
+}
+
+@utility bg-purple {
+  background-color: var(--accent-purple);
+}
+
+@utility bg-teal {
+  background-color: var(--accent-teal);
+}
+
+@utility border-tertiary {
+  border-color: var(--text-tertiary);
+}
+
+@utility text-purple {
+  color: var(--accent-purple);
+}
+
+@utility text-teal {
+  color: var(--accent-teal);
+}
