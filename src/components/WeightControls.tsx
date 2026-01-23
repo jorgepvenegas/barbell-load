@@ -16,30 +16,28 @@ export const WeightControls: Component = () => {
   const store = useStore();
   const { setWeight, setPercentage, setPercentageWeight } = useStoreActions();
 
-  const handleWeightInputChange = (event: Event) => {
-    const target = event.target as HTMLInputElement;
-    const newValue = Number(target.value);
-    if (isNaN(newValue)) return;
-    const newWeight = Math.min(Math.max(newValue, store.barWeight), MAX_WEIGHT);
+  const updatePercentageWeight = (newPercentage: number) => {
+    const percentageWeight = (newPercentage / 100) * store.weight;
+    setPercentageWeight(percentageWeight);
+    setPercentage(newPercentage);
+  };
+
+  const incrementWeight = () => {
+    const newWeight = Math.min(store.weight + 5, MAX_WEIGHT);
     setWeight(newWeight);
   };
 
-  const handlePercentageInputChange = (event: Event) => {
-    const target = event.target as HTMLInputElement;
-    const newValue = Number(target.value);
-    if (isNaN(newValue)) return;
-    const newPercentage = Math.min(
-      Math.max(newValue, MIN_PERCENTAGE),
-      MAX_PERCENTAGE
-    );
-    updatePercentageWeight(newPercentage);
+  const decrementWeight = () => {
+    const newWeight = Math.max(store.weight - 5, store.barWeight);
+    setWeight(newWeight);
   };
 
-  const updatePercentageWeight = (newPercentage: number) => {
-    const percentageWeight = (newPercentage / 100) * store.weight;
+  const incrementPercentage = () => {
+    updatePercentageWeight(Math.min(store.percentage + PERCENTAGE_STEP, MAX_PERCENTAGE));
+  };
 
-    setPercentageWeight(percentageWeight);
-    setPercentage(newPercentage);
+  const decrementPercentage = () => {
+    updatePercentageWeight(Math.max(store.percentage - PERCENTAGE_STEP, MIN_PERCENTAGE));
   };
 
   createEffect(() => {
@@ -48,65 +46,67 @@ export const WeightControls: Component = () => {
   });
 
   return (
-    <div class="card card-compact bg-base-200">
-      <div class="card-body">
-        <h2 class="card-title text-lg">Weight controls</h2>
-        <div class="flex flex-row gap-5 w-full">
-          <div class="form-control w-2/4 flex flex-col gap-3">
-            <legend class="label">
-              <span class="label-text text-xl font-semibold">Target in lb:</span>
-            </legend>
-            <input
-              class="input input-primary w-full text-xl text-center"
-              value={store.weight}
-              type="number"
-              inputmode="numeric"
-              pattern="[0-9]*"
-              min={store.barWeight}
-              max={MAX_WEIGHT}
-              onChange={handleWeightInputChange}
-              aria-label="Target weight in pounds"
-            />
+    <div class="flex flex-col gap-5">
+      <div class="flex flex-col gap-3 w-full">
+        <h3 class="text-xl font-bold font-jakarta text-primary-color">
+          Target Weight
+        </h3>
+        <div class="flex items-center justify-between rounded-3xl px-5 h-[72px] bg-card">
+          <span class="text-[34px] font-extrabold font-jakarta text-primary-color">
+            {store.weight}
+          </span>
+          <div class="flex gap-3">
+            <button
+              class="flex items-center justify-center w-11 h-11 rounded-[22px] bg-elevated"
+              onClick={decrementWeight}
+              aria-label="Decrease weight"
+            >
+              <svg class="w-5 h-5 text-primary-color" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14" />
+              </svg>
+            </button>
+            <button
+              class="flex items-center justify-center w-11 h-11 rounded-[22px] bg-purple"
+              onClick={incrementWeight}
+              aria-label="Increase weight"
+            >
+              <svg class="w-5 h-5 text-white-color" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 5v14m7-7H5" />
+              </svg>
+            </button>
           </div>
-          <div class="form-control w-2/4 flex flex-col gap-3">
-            <legend class="label">
-              <span class="label-text text-xl font-semibold">Target %</span>
-            </legend>
-            <div class="join w-full h-12 text-xl">
-              <button
-                class="btn btn-primary btn-md join-item"
-                disabled={decrementButtonDisabled()}
-                onClick={() => {
-                  updatePercentageWeight(store.percentage - PERCENTAGE_STEP);
-                }}
-                aria-label="Decrease percentage by 5%"
-                title="Decrease percentage"
-              >
-                -
-              </button>
-              <input
-                class="input input-primary w-full text-2xl text-center join-item"
-                value={store.percentage}
-                type="number"
-                inputmode="numeric"
-                pattern="[0-9]*"
-                min={MIN_PERCENTAGE}
-                max={MAX_PERCENTAGE}
-                onChange={handlePercentageInputChange}
-                aria-label="Target percentage"
-              />
-              <button
-                disabled={increaseButtonDisabled()}
-                class="btn btn-primary join-item"
-                onClick={() => {
-                  updatePercentageWeight(store.percentage + PERCENTAGE_STEP);
-                }}
-                aria-label="Increase percentage by 5%"
-                title="Increase percentage"
-              >
-                +
-              </button>
-            </div>
+        </div>
+      </div>
+
+      <div class="flex flex-col gap-3 w-full">
+        <h3 class="text-xl font-bold font-jakarta text-primary-color">
+          Training % of Target
+        </h3>
+        <div class="flex items-center justify-between rounded-3xl px-5 h-[72px] bg-card">
+          <span class="text-[34px] font-extrabold font-jakarta" style="color: var(--accent-teal);">
+            {store.percentage}%
+          </span>
+          <div class="flex gap-3">
+            <button
+              class="flex items-center justify-center w-11 h-11 rounded-[22px] bg-elevated"
+              onClick={decrementPercentage}
+              disabled={decrementButtonDisabled()}
+              aria-label="Decrease percentage"
+            >
+              <svg class="w-5 h-5 text-primary-color" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14" />
+              </svg>
+            </button>
+            <button
+              class="flex items-center justify-center w-11 h-11 rounded-[22px] bg-purple"
+              onClick={incrementPercentage}
+              disabled={increaseButtonDisabled()}
+              aria-label="Increase percentage"
+            >
+              <svg class="w-5 h-5 text-white-color" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 5v14m7-7H5" />
+              </svg>
+            </button>
           </div>
         </div>
       </div>

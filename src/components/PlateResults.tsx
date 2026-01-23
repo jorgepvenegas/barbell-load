@@ -1,4 +1,4 @@
-import { Component, createMemo, Show } from "solid-js";
+import { Component, createMemo, Show, For } from "solid-js";
 import { useStore } from "../stores/store";
 import { calculatePlates } from "../utils/calculators";
 
@@ -17,25 +17,39 @@ export const PlateResults: Component = () => {
   });
 
   return (
-    <div class="card card-compact bg-base-200">
-      <div class="card-body">
-        <h2 class="card-title text-lg sm:text-xl">
-          For {store.percentageWeight.toFixed(2)}lb you'll need:
-        </h2>
-        <Show when={plates()}>
-          <ul class="list-disc pl-4 text-base sm:text-lg">
-            {plates()?.map(({ count, weight }) => (
-              <li>
-                {count} plate(s) of {weight}lb per side
-              </li>
-            ))}
-          </ul>
+    <div class="flex flex-col gap-4 w-full">
+      <h3 class="text-xl font-bold font-jakarta text-primary-color">
+        Calculated Weight
+      </h3>
+      <div class="flex flex-col gap-4 rounded-3xl p-6 bg-purple shadow-[0_4px_4px_rgba(0,0,0,0.25)]">
+        <div class="text-[34px] font-extrabold font-jakarta text-white-color">
+          {store.percentageWeight.toFixed(0)} lb
+        </div>
+
+        <div class="text-[13px] font-medium font-inter" style="color: rgba(255, 255, 255, 0.7);">
+          {store.barWeight} lb Olympic Bar
+        </div>
+
+        <Show when={!isLessThanTheBarbell()}>
+          <div class="text-[15px] leading-[1.4] font-inter" style="color: rgba(255, 255, 255, 0.85);">
+            <Show when={plates() && plates()!.length > 0}>
+              <div>Per Side:</div>
+              <For each={plates()}>
+                {({ count, weight }) => (
+                  <div>{count}× {weight} lb</div>
+                )}
+              </For>
+            </Show>
+            <Show when={plates()?.length === 0}>
+              <div>Just the barbell!</div>
+            </Show>
+          </div>
         </Show>
-        <Show when={plates()?.length === 0}>
-          <p class="text-base sm:text-lg">Just the barbell 😀</p>
-        </Show>
+
         <Show when={isLessThanTheBarbell()}>
-          <small>(that's not even the barbell weight but that's okay!)</small>
+          <div class="text-[15px] font-inter" style="color: rgba(255, 255, 255, 0.85);">
+            That's less than the barbell weight
+          </div>
         </Show>
       </div>
     </div>
