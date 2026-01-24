@@ -21,7 +21,7 @@ export const PlateSelector: Component = () => {
       <h3 class="text-xl font-bold font-jakarta text-primary-color">
         Available Plates
       </h3>
-      <div class="flex flex-col gap-4 rounded-3xl p-6 bg-card">
+      <div class="flex flex-col gap-4 rounded-xl p-6 bg-card">
         {store.selectedPlates.map(({ enabled, weight }, index) => (
           <button
             class="flex items-center gap-4 w-full"

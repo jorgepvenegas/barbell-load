@@ -51,7 +51,7 @@ export const WeightControls: Component = () => {
         <h3 class="text-xl font-bold font-jakarta text-primary-color">
           Target Weight
         </h3>
-        <div class="flex items-center justify-between rounded-3xl px-5 h-[72px] bg-card">
+        <div class="flex items-center justify-between rounded-xl px-5 h-[72px] bg-card">
           <span class="text-[34px] font-extrabold font-jakarta text-primary-color">
             {store.weight}
           </span>
@@ -82,7 +82,7 @@ export const WeightControls: Component = () => {
         <h3 class="text-xl font-bold font-jakarta text-primary-color">
           Training % of Target
         </h3>
-        <div class="flex items-center justify-between rounded-3xl px-5 h-[72px] bg-card">
+        <div class="flex items-center justify-between rounded-xl px-5 h-[72px] bg-card">
           <span class="text-[34px] font-extrabold font-jakarta" style="color: var(--accent-teal);">
             {store.percentage}%
           </span>

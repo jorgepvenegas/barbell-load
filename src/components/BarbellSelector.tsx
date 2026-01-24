@@ -14,7 +14,7 @@ export const BarbellSelector: Component = () => {
       </h3>
       <div class="flex flex-col gap-3">
         <button
-          class="flex items-center justify-between h-16 rounded-3xl px-6"
+          class="flex items-center justify-between h-16 rounded-xl px-6"
           classList={{
             "bg-purple": isSelected(45),
             "bg-card": !isSelected(45),
@@ -41,7 +41,7 @@ export const BarbellSelector: Component = () => {
         </button>
 
         <button
-          class="flex items-center justify-between h-16 rounded-3xl px-6"
+          class="flex items-center justify-between h-16 rounded-xl px-6"
           classList={{
             "bg-purple": isSelected(33),
             "bg-card": !isSelected(33),
