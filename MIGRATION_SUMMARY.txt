@@ -1,0 +1,178 @@
+═══════════════════════════════════════════════════════════════════════════════
+  REACT NATIVE MIGRATION - COMPLETE
+═══════════════════════════════════════════════════════════════════════════════
+
+BRANCH: feat/react-native-migration
+
+PROJECT STRUCTURE
+─────────────────────────────────────────────────────────────────────────────
+packages/
+├── web/            Solid.js web app (moved from root)
+├── mobile/         React Native iOS app (NEW)
+└── shared/         Shared utilities (NEW)
+
+ROOT FILES
+├── pnpm-workspace.yaml    Monorepo configuration
+├── package.json           Root workspace scripts
+├── QUICK_START.md         5-minute setup guide
+├── MOBILE_SETUP.md        Comprehensive development guide
+└── MOBILE_SETUP.md        iOS setup & troubleshooting
+
+═══════════════════════════════════════════════════════════════════════════════
+
+MOBILE APP FEATURES (Complete Feature Parity with Web)
+─────────────────────────────────────────────────────────────────────────────
+✓ Calculator Screen
+  - Target weight input (±5 lb increments)
+  - Training percentage slider (40-100%, ±5%)
+  - Real-time plate distribution calculation
+  - Shows required plates per side
+
+✓ Plates Screen
+  - Manual plate counter
+  - Increment/decrement buttons for each plate weight
+  - Real-time total weight display
+  - All plates configurable
+
+✓ Settings Screen
+  - Barbell type selection (33 lb / 45 lb)
+  - Toggle available plates on/off
+  - Light/dark theme toggle
+  - Reset all settings button
+
+✓ State Management
+  - AppContext with useReducer for main state
+  - ThemeContext for light/dark mode
+  - AsyncStorage persistence (all data survives app restart)
+  - Type-safe with full TypeScript support
+
+✓ Navigation
+  - Bottom tab navigator
+  - Material Community Icons
+  - Active/inactive states
+  - Smooth transitions
+
+═══════════════════════════════════════════════════════════════════════════════
+
+KEY TECHNOLOGIES
+─────────────────────────────────────────────────────────────────────────────
+• React 18.3.1
+• React Native 0.83.1
+• React Navigation 6.x (bottom tabs)
+• TypeScript 5.9.3 (strict mode)
+• AsyncStorage 1.23.1 (persistence)
+• react-native-vector-icons 10.0.0 (icons)
+• React Native Reanimated 3.6.1 (animations)
+• React Native Gesture Handler 2.14.2 (gestures)
+
+═══════════════════════════════════════════════════════════════════════════════
+
+FILE ORGANIZATION
+─────────────────────────────────────────────────────────────────────────────
+packages/mobile/src/
+├── screens/
+│   ├── CalculatorScreen.tsx    Main calculator interface
+│   ├── PlatesScreen.tsx        Plate counter interface
+│   └── SettingsScreen.tsx      Configuration interface
+├── stores/
+│   ├── AppContext.tsx          State management (weight, %, plates)
+│   └── ThemeContext.tsx        Theme management (light/dark)
+├── navigation/
+│   └── RootNavigator.tsx       Bottom tab navigation
+├── theme/
+│   └── colors.ts               Light/dark theme definitions
+├── hooks/
+│   └── useAsyncStorage.ts      Async storage hook
+└── App.tsx                     Root app component with providers
+
+packages/shared/src/
+├── calculators.ts              Plate calculation logic
+├── constants.ts                App constants
+├── types.ts                    TypeScript type definitions
+└── index.ts                    Main export file
+
+═══════════════════════════════════════════════════════════════════════════════
+
+GETTING STARTED
+─────────────────────────────────────────────────────────────────────────────
+
+SEE: QUICK_START.md (5-minute setup)
+    or
+     MOBILE_SETUP.md (detailed 30-minute setup)
+
+Quick commands:
+  pnpm install              # Install all dependencies
+  pnpm mobile:start         # Start Metro bundler
+  pnpm mobile:ios           # Run on iOS simulator
+  pnpm web:dev              # Run web app
+
+═══════════════════════════════════════════════════════════════════════════════
+
+DEVELOPMENT WORKFLOW
+─────────────────────────────────────────────────────────────────────────────
+Terminal 1: Metro bundler (always running)
+  $ pnpm mobile:start
+
+Terminal 2: Run/develop
+  $ pnpm mobile:ios
+
+Terminal 3: Code editor
+  $ code packages/mobile
+
+Make changes → Cmd+R in simulator to reload
+
+═══════════════════════════════════════════════════════════════════════════════
+
+SHARED CODE STRUCTURE
+─────────────────────────────────────────────────────────────────────────────
+Business Logic:
+  - calculatePlates() function (unchanged from Solid.js)
+  - Plate weight calculations
+  - Constants (MIN_PERCENTAGE, MAX_WEIGHT, etc.)
+
+Type Definitions:
+  - BarWeight (33 | 45)
+  - PlateWeight
+  - PlatePair
+  - StoreState
+  - StoreActions
+
+Both web and mobile apps import from @barbell-calc/shared
+
+═══════════════════════════════════════════════════════════════════════════════
+
+STATE MANAGEMENT PATTERN
+─────────────────────────────────────────────────────────────────────────────
+AppContext Pattern:
+  1. useReducer for state updates
+  2. Context.Provider wraps app
+  3. Custom hook (useAppStore) provides access
+  4. Actions: setWeight, setPercentage, setBarWeight, etc.
+  5. Auto-persists to AsyncStorage on change
+
+ThemeContext Pattern:
+  1. useState for light/dark toggle
+  2. AsyncStorage for persistence
+  3. Custom hook (useTheme) provides access
+  4. Automatic theme switch on mount (respects system preference)
+
+═══════════════════════════════════════════════════════════════════════════════
+
+NEXT STEPS
+─────────────────────────────────────────────────────────────────────────────
+1. Read QUICK_START.md for immediate setup
+2. Follow MOBILE_SETUP.md for comprehensive guide
+3. Review packages/mobile/src/ code structure
+4. Test all three screens (Calculator, Plates, Settings)
+5. Test both light and dark themes
+6. Test persistence (close & reopen app)
+
+═══════════════════════════════════════════════════════════════════════════════
+
+COMMITS
+─────────────────────────────────────────────────────────────────────────────
+✓ 8f7a085 - feat: migrate to monorepo with React Native mobile app
+✓ 3285a83 - docs: add comprehensive iOS development setup guide
+✓ 27e59de - docs: add quick start guide for iOS development
+
+═══════════════════════════════════════════════════════════════════════════════
