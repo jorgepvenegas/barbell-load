@@ -1,0 +1,42 @@
+node_modules/
+.gradle
+build/
+*.iml
+.DS_Store
+.idea
+.gradle
+local.properties
+*.log
+yarn-error.log
+*.jks
+*.p8
+*.p12
+*.key
+*.mobileprovision
+*.orig.*
+web-build/
+
+# Xcode
+#
+build/
+*.pbxuser
+!default.pbxuser
+*.mode1v3
+!default.mode1v3
+*.mode2v3
+!default.mode2v3
+*.perspectivev3
+!default.perspectivev3
+xcuserdata
+*.xcworkspace/xcuserdata
+*.xcworkspace/xcshareddata/IDEWorkspaceChecks.plist
+
+# Ruby / CocoaPods
+/ios/Pods/
+/Pods/
+
+# Temporary files created by merge conflicts
+*.orig
+
+# Misc
+.env*.local

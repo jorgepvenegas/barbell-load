@@ -1,28 +1,14 @@
 {
-  "name": "vite-template-solid",
-  "version": "0.0.0",
-  "description": "",
+  "name": "barbell-calculator-monorepo",
+  "version": "1.0.0",
+  "description": "Barbell load calculator - Web & Mobile",
+  "private": true,
   "scripts": {
-    "start": "vite",
-    "dev": "vite",
-    "build": "vite build",
-    "serve": "vite preview"
-  },
-  "license": "MIT",
-  "devDependencies": {
-    "@tailwindcss/postcss": "^4.1.18",
-    "daisyui": "^5.5.14",
-    "postcss": "^8.5.6",
-    "solid-devtools": "^0.29.3",
-    "solid-styled-components": "^0.28.5",
-    "tailwindcss": "^4.1.18",
-    "typescript": "^5.9.3",
-    "vite": "^5.4.21",
-    "vite-plugin-solid": "^2.11.10"
-  },
-  "dependencies": {
-    "@solidjs/router": "^0.15.4",
-    "@vercel/analytics": "^1.6.1",
-    "solid-js": "^1.9.10"
+    "web:dev": "pnpm -F web dev",
+    "web:build": "pnpm -F web build",
+    "mobile:start": "pnpm -F mobile start",
+    "mobile:dev": "pnpm -F mobile dev",
+    "mobile:pod": "pnpm -F mobile pods",
+    "shared:build": "pnpm -F shared build"
   }
 }
