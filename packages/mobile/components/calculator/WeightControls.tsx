@@ -1,7 +1,7 @@
 import { View, Text, Pressable } from 'react-native';
 import { useMemo } from 'react';
 import { MAX_PERCENTAGE, MAX_WEIGHT, MIN_PERCENTAGE, PERCENTAGE_STEP } from '@barbell/shared';
-import { useStore } from '../stores/useStore';
+import { useStore } from '@/store/useStore';
 
 export const WeightControls = () => {
   const { weight, percentage, percentageWeight, barWeight, setWeight, setPercentage, setPercentageWeight } = useStore();

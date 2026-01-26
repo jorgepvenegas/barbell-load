@@ -1,6 +1,6 @@
 import { View, Text } from 'react-native';
-import { useStore } from '../../src/stores/useStore';
-import { Plates } from '../../src/components/Plates';
+import { Plates } from '@/components/calculator/Plates';
+import { useStore } from '@/store/useStore';
 
 export default function PlatesScreen() {
   const { isHydrated } = useStore();
@@ -8,7 +8,7 @@ export default function PlatesScreen() {
   if (!isHydrated) {
     return (
       <View className="flex-1 items-center justify-center bg-white">
-        <Text className="text-gray-600">Loading...</Text>
+        <Text className="text-lg text-gray-600">Loading...</Text>
       </View>
     );
   }

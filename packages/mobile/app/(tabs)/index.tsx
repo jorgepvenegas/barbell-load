@@ -1,6 +1,6 @@
 import { View, Text } from 'react-native';
-import { useStore } from '../../src/stores/useStore';
-import { Calculator } from '../../src/components/Calculator';
+import { Calculator } from '@/components/calculator/Calculator';
+import { useStore } from '@/store/useStore';
 
 export default function CalculatorScreen() {
   const { isHydrated } = useStore();
@@ -8,7 +8,7 @@ export default function CalculatorScreen() {
   if (!isHydrated) {
     return (
       <View className="flex-1 items-center justify-center bg-white">
-        <Text className="text-gray-600">Loading...</Text>
+        <Text className="text-lg text-gray-600">Loading...</Text>
       </View>
     );
   }

@@ -1,7 +1,7 @@
 import { View, Text, Pressable, ScrollView } from 'react-native';
 import { useState, useMemo, useEffect } from 'react';
 import type { PlateWeight } from '@barbell/shared';
-import { useStore } from '../stores/useStore';
+import { useStore } from '@/store/useStore';
 
 export const Plates = () => {
   const { selectedPlates, barWeight } = useStore();

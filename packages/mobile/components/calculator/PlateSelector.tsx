@@ -1,5 +1,5 @@
-import { View, Text, Pressable, ScrollView } from 'react-native';
-import { useStore } from '../stores/useStore';
+import { View, Text, Pressable } from 'react-native';
+import { useStore } from '@/store/useStore';
 
 export const PlateSelector = () => {
   const { selectedPlates, setSelectedPlates } = useStore();

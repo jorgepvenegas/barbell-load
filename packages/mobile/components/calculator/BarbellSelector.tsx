@@ -1,5 +1,5 @@
 import { View, Text, Pressable } from 'react-native';
-import { useStore } from '../stores/useStore';
+import { useStore } from '@/store/useStore';
 
 export const BarbellSelector = () => {
   const { barWeight, setBarWeight } = useStore();

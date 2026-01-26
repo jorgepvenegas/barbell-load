@@ -1,17 +1,17 @@
-import { View, Text, Pressable, ScrollView } from 'react-native';
-import { useStore } from '../../src/stores/useStore';
-import { useThemeStore } from '../../src/stores/useThemeStore';
-import { BarbellSelector } from '../../src/components/BarbellSelector';
-import { PlateSelector } from '../../src/components/PlateSelector';
+import { View, Text, ScrollView, Pressable } from 'react-native';
+import { BarbellSelector } from '@/components/calculator/BarbellSelector';
+import { PlateSelector } from '@/components/calculator/PlateSelector';
+import { useStore } from '@/store/useStore';
+import { useThemeStore } from '@/store/useThemeStore';
 
 export default function SettingsScreen() {
   const { isHydrated } = useStore();
-  const { theme, toggleTheme, isHydrated: themeHydrated } = useThemeStore();
+  const { isHydrated: themeHydrated, theme, toggleTheme } = useThemeStore();
 
   if (!isHydrated || !themeHydrated) {
     return (
       <View className="flex-1 items-center justify-center bg-white">
-        <Text className="text-gray-600">Loading...</Text>
+        <Text className="text-lg text-gray-600">Loading...</Text>
       </View>
     );
   }
@@ -28,12 +28,13 @@ export default function SettingsScreen() {
         <View className="flex flex-col gap-4 w-full">
           <Text className="text-xl font-bold text-purple-600">Theme</Text>
           <Pressable
-            className="bg-purple-600 p-4 rounded-lg"
+            className="flex flex-row items-center justify-between h-16 rounded-xl px-6 bg-gray-100"
             onPress={toggleTheme}
           >
-            <Text className="text-white text-center font-semibold">
-              {theme === 'light' ? 'Switch to Dark' : 'Switch to Light'}
+            <Text className="text-lg font-bold text-gray-900">
+              {theme === 'light' ? 'Light Mode' : 'Dark Mode'}
             </Text>
+            <Text className="text-2xl">{theme === 'light' ? '☀️' : '🌙'}</Text>
           </Pressable>
         </View>
       </View>

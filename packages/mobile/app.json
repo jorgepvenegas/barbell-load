@@ -1,24 +1,42 @@
 {
   "expo": {
-    "name": "Barbell Load Calculator",
-    "slug": "barbell-load-calculator",
+    "name": "mobile",
+    "slug": "mobile",
     "version": "1.0.0",
+
+    "scheme": "mobile",
+    "platforms": ["ios", "android"],
+    "web": {
+      "bundler": "metro",
+      "output": "static",
+      "favicon": "./assets/favicon.png"
+    },
+    "plugins": ["expo-router"],
+    "experiments": {
+      "typedRoutes": true,
+
+      "tsconfigPaths": true
+    },
+
     "orientation": "portrait",
-    "scheme": "barbellcalc",
-    "userInterfaceStyle": "automatic",
-    "newArchEnabled": true,
+    "icon": "./assets/icon.png",
+
+    "userInterfaceStyle": "light",
+
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "assetBundlePatterns": ["**/*"],
     "ios": {
-      "supportsTablet": true,
-      "bundleIdentifier": "com.jorgepvenegas.barbellcalc"
+      "supportsTablet": true
     },
     "android": {
-      "package": "com.jorgepvenegas.barbellcalc"
-    },
-    "web": {
-      "bundler": "metro"
-    },
-    "plugins": [
-      "expo-router"
-    ]
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#ffffff"
+      }
+    }
   }
 }

@@ -1,7 +1,7 @@
 import { View, Text } from 'react-native';
 import { useMemo } from 'react';
 import { calculatePlates } from '@barbell/shared';
-import { useStore } from '../stores/useStore';
+import { useStore } from '@/store/useStore';
 
 export const PlateResults = () => {
   const { weight, percentage, percentageWeight, barWeight, selectedPlates } = useStore();

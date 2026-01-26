@@ -4,10 +4,6 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import {
   availablePlates,
   BarWeight,
-  STORAGE_KEY,
-  WEIGHT_STORAGE_KEY,
-  PERCENTAGE_STORAGE_KEY,
-  BAR_WEIGHT_STORAGE_KEY,
 } from '@barbell/shared';
 
 type StoreState = {
