@@ -1,28 +1,18 @@
 {
-  "name": "vite-template-solid",
+  "name": "barbell-load-calculator",
   "version": "0.0.0",
-  "description": "",
+  "private": true,
+  "description": "Monorepo for Barbell Load Calculator",
   "scripts": {
-    "start": "vite",
-    "dev": "vite",
-    "build": "vite build",
-    "serve": "vite preview"
+    "dev:web": "pnpm --filter @barbell/web dev",
+    "dev:mobile": "pnpm --filter @barbell/mobile start",
+    "build:web": "pnpm --filter @barbell/web build",
+    "build:all": "pnpm -r build",
+    "typecheck": "pnpm -r typecheck",
+    "test": "pnpm -r test"
   },
   "license": "MIT",
   "devDependencies": {
-    "@tailwindcss/postcss": "^4.1.18",
-    "daisyui": "^5.5.14",
-    "postcss": "^8.5.6",
-    "solid-devtools": "^0.29.3",
-    "solid-styled-components": "^0.28.5",
-    "tailwindcss": "^4.1.18",
-    "typescript": "^5.9.3",
-    "vite": "^5.4.21",
-    "vite-plugin-solid": "^2.11.10"
-  },
-  "dependencies": {
-    "@solidjs/router": "^0.15.4",
-    "@vercel/analytics": "^1.6.1",
-    "solid-js": "^1.9.10"
+    "typescript": "^5.9.3"
   }
 }
