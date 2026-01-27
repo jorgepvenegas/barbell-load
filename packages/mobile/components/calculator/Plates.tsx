@@ -1,4 +1,5 @@
 import { View, Text, Pressable, ScrollView } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { useState, useMemo, useEffect } from 'react';
 import type { PlateWeight } from '@barbell/shared';
 import { useStore } from '@/store/useStore';
@@ -53,51 +54,53 @@ export const Plates = () => {
   };
 
   return (
-    <ScrollView className="flex-1 bg-white">
-      <View className="p-6 gap-6">
-        <Text className="text-[34px] font-bold text-purple-600">Plate Counter</Text>
+    <SafeAreaView className="flex-1 bg-white" edges={['top']}>
+      <ScrollView className="flex-1">
+        <View className="p-6 gap-6">
+          <Text className="text-[34px] font-bold text-purple-600">Plate Counter</Text>
 
-        <View className="flex flex-col gap-4 w-full">
-          <Text className="text-xl font-bold text-purple-600">Total Weight</Text>
-          <View className="flex flex-col gap-1 rounded-xl p-6 bg-teal-600">
-            <Text className="text-[34px] font-extrabold text-white">{totalWeight} lb</Text>
-            <Text className="text-[15px] font-medium text-white opacity-80">
-              {barWeight} lb Olympic Bar + Plates
-            </Text>
+          <View className="flex flex-col gap-4 w-full">
+            <Text className="text-xl font-bold text-purple-600">Total Weight</Text>
+            <View className="flex flex-col gap-1 rounded-xl p-6 bg-teal-600">
+              <Text className="text-[34px] font-extrabold text-white">{totalWeight} lb</Text>
+              <Text className="text-[15px] font-medium text-white opacity-80">
+                {barWeight} lb Olympic Bar + Plates
+              </Text>
+            </View>
           </View>
-        </View>
 
-        <View className="flex flex-col gap-4 w-full">
-          <Text className="text-xl font-bold text-purple-600">Plates Per Side</Text>
-          <View className="flex flex-col gap-5 rounded-xl p-6 bg-gray-100">
-            {enabledPlates.map((plate) => (
-              <View key={plate.weight} className="flex flex-row items-center justify-between w-full">
-                <Text className="text-base font-semibold text-gray-900">{plate.weight} lb</Text>
-                <View className="flex flex-row items-center gap-3">
-                  <Pressable
-                    className={`flex items-center justify-center w-9 h-9 rounded-[18px] ${
-                      plateCounts[plate.weight] === 0 ? 'bg-gray-300 opacity-50' : 'bg-gray-200'
-                    }`}
-                    onPress={() => handleDecrement(plate.weight)}
-                    disabled={plateCounts[plate.weight] === 0}
-                  >
-                    <Text className="text-xl text-gray-900">−</Text>
-                  </Pressable>
-                  <Text className="text-xl font-bold text-center min-w-[24px] text-gray-900">
-                    {plateCounts[plate.weight]}
-                  </Text>
-                  <Pressable
-                    className="flex items-center justify-center w-9 h-9 rounded-[18px] bg-purple-600"
-                    onPress={() => handleIncrement(plate.weight)}
-                  >
-                    <Text className="text-xl text-white">+</Text>
-                  </Pressable>
+          <View className="flex flex-col gap-4 w-full">
+            <Text className="text-xl font-bold text-purple-600">Plates Per Side</Text>
+            <View className="flex flex-col gap-5 rounded-xl p-6 bg-gray-100">
+              {enabledPlates.map((plate) => (
+                <View key={plate.weight} className="flex flex-row items-center justify-between w-full">
+                  <Text className="text-base font-semibold text-gray-900">{plate.weight} lb</Text>
+                  <View className="flex flex-row items-center gap-3">
+                    <Pressable
+                      className={`flex items-center justify-center w-9 h-9 rounded-[18px] ${
+                        plateCounts[plate.weight] === 0 ? 'bg-gray-300 opacity-50' : 'bg-gray-200'
+                      }`}
+                      onPress={() => handleDecrement(plate.weight)}
+                      disabled={plateCounts[plate.weight] === 0}
+                    >
+                      <Text className="text-xl text-gray-900">−</Text>
+                    </Pressable>
+                    <Text className="text-xl font-bold text-center min-w-[24px] text-gray-900">
+                      {plateCounts[plate.weight]}
+                    </Text>
+                    <Pressable
+                      className="flex items-center justify-center w-9 h-9 rounded-[18px] bg-purple-600"
+                      onPress={() => handleIncrement(plate.weight)}
+                    >
+                      <Text className="text-xl text-white">+</Text>
+                    </Pressable>
+                  </View>
                 </View>
-              </View>
-            ))}
+              ))}
+            </View>
           </View>
         </View>
-      </View>
-    </ScrollView>
+      </ScrollView>
+    </SafeAreaView>
   );
 };
