@@ -5,7 +5,7 @@
   "description": "Monorepo for Barbell Load Calculator",
   "scripts": {
     "dev:web": "pnpm --filter @barbell/web dev",
-    "dev:mobile": "pnpm --filter @barbell/mobile start",
+    "dev:mobile": "pnpm --filter mobile start",
     "build:web": "pnpm --filter @barbell/web build",
     "build:all": "pnpm -r build",
     "typecheck": "pnpm -r typecheck",
