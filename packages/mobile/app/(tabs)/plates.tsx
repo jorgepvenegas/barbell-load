@@ -7,8 +7,8 @@ export default function PlatesScreen() {
 
   if (!isHydrated) {
     return (
-      <View className="flex-1 items-center justify-center bg-white">
-        <Text className="text-lg text-gray-600">Loading...</Text>
+      <View className="flex-1 items-center justify-center bg-background">
+        <Text className="text-lg text-foreground-secondary">Loading...</Text>
       </View>
     );
   }

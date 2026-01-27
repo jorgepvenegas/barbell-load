@@ -7,7 +7,7 @@ const Settings: Component = () => {
   return (
     <Layout>
       <header class="flex items-center justify-between py-4">
-        <h1 class="text-[34px] font-bold font-jakarta text-primary-color">
+        <h1 class="text-4xl font-bold font-jakarta text-primary-color">
           Settings
         </h1>
       </header>

@@ -22,7 +22,7 @@ export const PlateResults: Component = () => {
         Calculated Weight
       </h3>
       <div class="flex flex-col gap-4 rounded-xl p-6 bg-purple shadow-[0_4px_4px_rgba(0,0,0,0.25)]">
-        <div class="text-[34px] font-extrabold font-jakarta text-white-color">
+        <div class="text-4xl font-extrabold font-jakarta text-white-color">
           {store.percentageWeight.toFixed(0)} lb
         </div>
 
