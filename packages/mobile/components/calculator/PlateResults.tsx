@@ -22,8 +22,8 @@ export const PlateResults = () => {
 
   return (
     <View className="flex flex-col gap-4 w-full">
-      <Text className="text-xl font-bold text-purple-900">Calculated Weight</Text>
-      <View className="flex flex-col gap-4 rounded-xl p-6 bg-teal-600">
+      <Text className="text-xl font-bold text-foreground">Calculated Weight</Text>
+      <View className="flex flex-col gap-4 rounded-xl p-6 bg-accent">
         <Text className="text-4xl font-extrabold text-white">
           {percentageWeight.toFixed(0)} lb
         </Text>

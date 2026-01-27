@@ -38,18 +38,18 @@ export const WeightControls = () => {
   return (
     <View className="flex flex-col gap-5">
       <View className="flex flex-col gap-3 w-full">
-        <Text className="text-xl font-bold text-purple-900">Target Weight</Text>
-        <View className="flex flex-row items-center justify-between rounded-xl px-5 h-[72px] bg-gray-100">
-          <Text className="text-4xl font-extrabold text-gray-800">{weight}</Text>
+        <Text className="text-xl font-bold text-foreground">Target Weight</Text>
+        <View className="flex flex-row items-center justify-between rounded-xl px-5 h-[72px] bg-surface">
+          <Text className="text-4xl font-extrabold text-foreground-secondary">{weight}</Text>
           <View className="flex flex-row gap-3">
             <Pressable
-              className="flex items-center justify-center w-11 h-11 rounded-[22px] bg-purple-800"
+              className="flex items-center justify-center w-11 h-11 rounded-[22px] bg-primary"
               onPress={decrementWeight}
             >
               <Text className="text-xl text-white">−</Text>
             </Pressable>
             <Pressable
-              className="flex items-center justify-center w-11 h-11 rounded-[22px] bg-purple-800"
+              className="flex items-center justify-center w-11 h-11 rounded-[22px] bg-primary"
               onPress={incrementWeight}
             >
               <Text className="text-xl text-white">+</Text>
@@ -59,12 +59,12 @@ export const WeightControls = () => {
       </View>
 
       <View className="flex flex-col gap-3 w-full">
-        <Text className="text-xl font-bold text-purple-900">Training % of Target</Text>
-        <View className="flex flex-row items-center justify-between rounded-xl px-5 h-[72px] bg-gray-100">
-          <Text className="text-4xl font-extrabold text-gray-800">{percentage}%</Text>
+        <Text className="text-xl font-bold text-foreground">Training % of Target</Text>
+        <View className="flex flex-row items-center justify-between rounded-xl px-5 h-[72px] bg-surface">
+          <Text className="text-4xl font-extrabold text-foreground-secondary">{percentage}%</Text>
           <View className="flex flex-row gap-3">
             <Pressable
-              className={`flex items-center justify-center w-11 h-11 rounded-[22px] bg-purple-800 ${
+              className={`flex items-center justify-center w-11 h-11 rounded-[22px] bg-primary ${
                 decrementButtonDisabled && 'opacity-50'
               }`}
               onPress={decrementPercentage}
@@ -73,7 +73,7 @@ export const WeightControls = () => {
               <Text className="text-xl text-white">−</Text>
             </Pressable>
             <Pressable
-              className={`flex items-center justify-center w-11 h-11 rounded-[22px] bg-purple-800 ${
+              className={`flex items-center justify-center w-11 h-11 rounded-[22px] bg-primary ${
                 increaseButtonDisabled && 'opacity-50'
               }`}
               onPress={incrementPercentage}
