@@ -57,7 +57,7 @@ const Plates: Component = () => {
   return (
     <Layout>
       <header class="flex items-center justify-between py-4">
-        <h1 class="text-[34px] font-bold font-jakarta text-primary-color">
+        <h1 class="text-4xl font-bold font-jakarta text-primary-color">
           Plate Counter
         </h1>
       </header>
@@ -68,7 +68,7 @@ const Plates: Component = () => {
             Total Weight
           </h2>
           <div class="flex flex-col gap-1 rounded-xl p-6 bg-teal">
-            <div class="text-[34px] font-extrabold font-jakarta text-white-color">
+            <div class="text-4xl font-extrabold font-jakarta text-white-color">
               {totalWeight()} lb
             </div>
             <div class="text-[15px] font-medium font-inter" style="color: rgba(255, 255, 255, 0.8);">

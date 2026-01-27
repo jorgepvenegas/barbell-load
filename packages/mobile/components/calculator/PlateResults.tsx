@@ -22,23 +22,23 @@ export const PlateResults = () => {
 
   return (
     <View className="flex flex-col gap-4 w-full">
-      <Text className="text-xl font-bold text-purple-600">Calculated Weight</Text>
-      <View className="flex flex-col gap-4 rounded-xl p-6 bg-purple-600 shadow-lg">
-        <Text className="text-[34px] font-extrabold text-white">
+      <Text className="text-xl font-bold text-purple-900">Calculated Weight</Text>
+      <View className="flex flex-col gap-4 rounded-xl p-6 bg-teal-600 shadow-lg">
+        <Text className="text-4xl font-extrabold text-white">
           {percentageWeight.toFixed(0)} lb
         </Text>
 
-        <Text className="text-[15px] font-medium text-white opacity-80">
-          {barWeight} lb Barbell
+        <Text className="text-[15px] text-white font-bold">
+          with {barWeight} lb Barbell:
         </Text>
 
         {!isLessThanTheBarbell && (
           <View className="text-[15px]">
             {plates && plates.length > 0 ? (
               <View>
-                <Text className="text-white opacity-85 mb-1">Plates Per Side:</Text>
+                <Text className="text-white mb-1">Plates Per Side:</Text>
                 {plates.map(({ count, weight }, index) => (
-                  <Text key={index} className="text-white opacity-85">
+                  <Text key={index} className="text-white">
                     {count}× {weight} lb
                   </Text>
                 ))}
@@ -51,7 +51,7 @@ export const PlateResults = () => {
 
         {isLessThanTheBarbell && (
           <Text className="text-[15px] text-white opacity-85">
-            That's less than the barbell weight
+            That's less than the barbell weight!
           </Text>
         )}
       </View>

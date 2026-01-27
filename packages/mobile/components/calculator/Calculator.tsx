@@ -8,7 +8,7 @@ export const Calculator = () => {
     <SafeAreaView className="flex-1 bg-white" edges={['top']}>
       <ScrollView className="flex-1">
         <View className="p-6 gap-6">
-          <Text className="text-[34px] font-bold text-purple-600">Barbell Calc</Text>
+          <Text className="text-3xl font-bold text-purple-800">Barbell Calc</Text>
 
           <WeightControls />
 

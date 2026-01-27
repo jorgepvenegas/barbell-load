@@ -14,7 +14,7 @@ export const PlateSelector = () => {
 
   return (
     <View className="flex flex-col gap-4 w-full">
-      <Text className="text-xl font-bold text-purple-600">Available Plates</Text>
+      <Text className="text-xl font-bold text-purple-900">Available Plates</Text>
       <View className="flex flex-col gap-4 rounded-xl p-6 bg-gray-100">
         {selectedPlates.map(({ enabled, weight }, index) => (
           <Pressable
@@ -24,7 +24,7 @@ export const PlateSelector = () => {
           >
             <View
               className={`flex items-center justify-center w-7 h-7 rounded-lg ${
-                enabled ? 'bg-purple-600' : 'bg-transparent border-2 border-gray-400'
+                enabled ? 'bg-purple-800' : 'bg-transparent border-2 border-gray-400'
               }`}
             >
               {enabled && <Text className="text-white text-sm">✓</Text>}

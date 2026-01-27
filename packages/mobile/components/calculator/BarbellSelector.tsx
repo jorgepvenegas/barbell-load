@@ -8,11 +8,11 @@ export const BarbellSelector = () => {
 
   return (
     <View className="flex flex-col gap-4 w-full">
-      <Text className="text-xl font-bold text-purple-600">Barbell Type</Text>
-      <View className="flex flex-col gap-3">
+      <Text className="text-xl font-bold text-purple-900">Barbell Type</Text>
+      <View className="flex flex-row gap-3 w-full">
         <Pressable
-          className={`flex flex-row items-center justify-between h-16 rounded-xl px-6 ${
-            isSelected(45) ? 'bg-purple-600' : 'bg-gray-100'
+          className={`flex w-1/2 flex-row items-center justify-between h-16 rounded-xl px-6 ${
+            isSelected(45) ? 'bg-purple-800' : 'bg-gray-100'
           }`}
           onPress={() => setBarWeight(45)}
         >
@@ -31,8 +31,8 @@ export const BarbellSelector = () => {
         </Pressable>
 
         <Pressable
-          className={`flex flex-row items-center justify-between h-16 rounded-xl px-6 ${
-            isSelected(33) ? 'bg-purple-600' : 'bg-gray-100'
+          className={`flex w-1/2 flex-row items-center justify-between h-16 rounded-xl px-6 ${
+            isSelected(33) ? 'bg-purple-800' : 'bg-gray-100'
           }`}
           onPress={() => setBarWeight(33)}
         >
