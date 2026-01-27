@@ -35,7 +35,7 @@ export default function SettingsScreen() {
               className="flex flex-row items-center justify-between h-16 rounded-xl px-6 bg-gray-100"
               onPress={toggleTheme}
             >
-              <Text className="text-lg font-bold text-gray-900">
+              <Text className="text-lg font-bold text-gray-800">
                 {theme === 'light' ? 'Light Mode' : 'Dark Mode'}
               </Text>
               <Text className="text-2xl">{theme === 'light' ? '☀️' : '🌙'}</Text>

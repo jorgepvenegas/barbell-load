@@ -29,7 +29,7 @@ export const PlateSelector = () => {
             >
               {enabled && <Text className="text-white text-sm">✓</Text>}
             </View>
-            <Text className="text-base font-semibold text-gray-900">{weight} lb</Text>
+            <Text className="text-base font-semibold text-gray-800">{weight} lb</Text>
           </Pressable>
         ))}
       </View>

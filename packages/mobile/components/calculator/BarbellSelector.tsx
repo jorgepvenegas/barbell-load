@@ -18,7 +18,7 @@ export const BarbellSelector = () => {
         >
           <Text
             className={`text-lg font-bold ${
-              isSelected(45) ? 'text-white' : 'text-gray-900'
+              isSelected(45) ? 'text-white' : 'text-gray-800'
             }`}
           >
             45 lb
@@ -38,7 +38,7 @@ export const BarbellSelector = () => {
         >
           <Text
             className={`text-lg font-bold ${
-              isSelected(33) ? 'text-white' : 'text-gray-900'
+              isSelected(33) ? 'text-white' : 'text-gray-800'
             }`}
           >
             33 lb

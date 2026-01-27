@@ -74,7 +74,7 @@ export const Plates = () => {
             <View className="flex flex-col gap-5 rounded-xl p-6 bg-gray-100">
               {enabledPlates.map((plate) => (
                 <View key={plate.weight} className="flex flex-row items-center justify-between w-full">
-                  <Text className="text-base font-semibold text-gray-900">{plate.weight} lb</Text>
+                  <Text className="text-xl font-semibold text-gray-800">{plate.weight} lb</Text>
                   <View className="flex flex-row items-center gap-3">
                     <Pressable
                       className={`flex items-center justify-center w-9 h-9 rounded-[18px] bg-purple-800 ${
@@ -83,9 +83,9 @@ export const Plates = () => {
                       onPress={() => handleDecrement(plate.weight)}
                       disabled={plateCounts[plate.weight] === 0}
                     >
-                      <Text className="text-xl text-white">−</Text>
+                      <Text className="text-xl text-white">-</Text>
                     </Pressable>
-                    <Text className="text-xl font-bold text-center min-w-[24px] text-gray-900">
+                    <Text className="text-xl font-bold text-center min-w-[24px] text-gray-800">
                       {plateCounts[plate.weight]}
                     </Text>
                     <Pressable

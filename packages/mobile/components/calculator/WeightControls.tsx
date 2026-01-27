@@ -4,7 +4,7 @@ import { MAX_PERCENTAGE, MAX_WEIGHT, MIN_PERCENTAGE, PERCENTAGE_STEP } from '@ba
 import { useStore } from '@/store/useStore';
 
 export const WeightControls = () => {
-  const { weight, percentage, percentageWeight, barWeight, setWeight, setPercentage, setPercentageWeight } = useStore();
+  const { weight, percentage, barWeight, setWeight, setPercentage, setPercentageWeight } = useStore();
 
   const updatePercentageWeight = (newPercentage: number) => {
     const newPercentageWeight = (newPercentage / 100) * weight;
@@ -15,11 +15,13 @@ export const WeightControls = () => {
   const incrementWeight = () => {
     const newWeight = Math.min(weight + 5, MAX_WEIGHT);
     setWeight(newWeight);
+    setPercentageWeight((percentage / 100) * newWeight);
   };
 
   const decrementWeight = () => {
     const newWeight = Math.max(weight - 5, barWeight);
     setWeight(newWeight);
+    setPercentageWeight((percentage / 100) * newWeight);
   };
 
   const incrementPercentage = () => {
@@ -38,7 +40,7 @@ export const WeightControls = () => {
       <View className="flex flex-col gap-3 w-full">
         <Text className="text-xl font-bold text-purple-900">Target Weight</Text>
         <View className="flex flex-row items-center justify-between rounded-xl px-5 h-[72px] bg-gray-100">
-          <Text className="text-4xl font-extrabold text-gray-900">{weight}</Text>
+          <Text className="text-4xl font-extrabold text-gray-800">{weight}</Text>
           <View className="flex flex-row gap-3">
             <Pressable
               className="flex items-center justify-center w-11 h-11 rounded-[22px] bg-purple-800"
@@ -59,7 +61,7 @@ export const WeightControls = () => {
       <View className="flex flex-col gap-3 w-full">
         <Text className="text-xl font-bold text-purple-900">Training % of Target</Text>
         <View className="flex flex-row items-center justify-between rounded-xl px-5 h-[72px] bg-gray-100">
-          <Text className="text-4xl font-extrabold text-teal-600">{percentage}%</Text>
+          <Text className="text-4xl font-extrabold text-gray-800">{percentage}%</Text>
           <View className="flex flex-row gap-3">
             <Pressable
               className={`flex items-center justify-center w-11 h-11 rounded-[22px] bg-purple-800 ${
