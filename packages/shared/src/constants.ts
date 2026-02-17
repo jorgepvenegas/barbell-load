@@ -3,6 +3,7 @@ export const STORAGE_KEY = "selectedPlates";
 export const WEIGHT_STORAGE_KEY = "barbell-weight";
 export const PERCENTAGE_STORAGE_KEY = "barbell-percentage";
 export const BAR_WEIGHT_STORAGE_KEY = "barbell-bar-weight";
+export const TRAINING_SESSIONS_STORAGE_KEY = "training-sessions";
 
 // Input constraints
 export const MIN_PERCENTAGE = 40;
