@@ -266,6 +266,7 @@ const SessionEditor: Component<SessionEditorProps> = (props) => {
                     <input
                       type="number"
                       inputMode="numeric"
+                      min="1"
                       class="rounded-lg px-3 py-2 text-sm font-inter bg-elevated text-primary-color outline-none w-full"
                       placeholder="0"
                       value={weightInputs()[entryIndex()]?.reps ?? ""}
@@ -287,6 +288,7 @@ const SessionEditor: Component<SessionEditorProps> = (props) => {
                     <input
                       type="number"
                       inputMode="decimal"
+                      min="1"
                       class="rounded-lg px-3 py-2 text-sm font-inter bg-elevated text-primary-color outline-none w-full"
                       placeholder="0"
                       value={weightInputs()[entryIndex()]?.weight ?? ""}
