@@ -80,6 +80,39 @@ export const TabBar: Component = () => {
       </A>
 
       <A
+        href="/training"
+        class="flex flex-col items-center justify-center gap-1 py-2 px-3 flex-1"
+        aria-current={isActive("/training") ? "page" : undefined}
+      >
+        <svg
+          class="w-6 h-6"
+          classList={{
+            "text-purple": isActive("/training"),
+            "text-tertiary-color": !isActive("/training"),
+          }}
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          stroke-width="2"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"
+          />
+        </svg>
+        <span
+          class="text-[13px] font-inter"
+          classList={{
+            "font-semibold text-purple": isActive("/training"),
+            "font-medium text-tertiary-color": !isActive("/training"),
+          }}
+        >
+          Training
+        </span>
+      </A>
+
+      <A
         href="/settings"
         class="flex flex-col items-center justify-center gap-1 py-2 px-3 flex-1"
         aria-current={isActive("/settings") ? "page" : undefined}
