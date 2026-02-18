@@ -106,6 +106,15 @@ const createTrainingStore = () => {
         })
       );
     },
+
+    updateSessionDate: (id: string, date: string) => {
+      setState(
+        produce((s) => {
+          const session = s.sessions.find((sess) => sess.id === id);
+          if (session) session.date = date;
+        })
+      );
+    },
   };
 
   createEffect(() => {

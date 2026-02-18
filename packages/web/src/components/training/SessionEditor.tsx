@@ -10,6 +10,7 @@ import ExercisePicker from "./ExercisePicker";
 interface SessionEditorProps {
   session: TrainingSession;
   onBack: () => void;
+  onUpdateDate: (date: string) => void;
   onAddExercise: (exerciseId: string) => void;
   onRemoveExercise: (entryIndex: number) => void;
   onAddWeightSet: (entryIndex: number, set: WeightSet) => void;
@@ -60,11 +61,6 @@ const SessionEditor: Component<SessionEditorProps> = (props) => {
     }
   };
 
-  const formatDate = (dateStr: string) => {
-    const [year, month, day] = dateStr.split("-");
-    return `${month}/${day}/${year}`;
-  };
-
   return (
     <div class="flex flex-col gap-5">
       <div class="flex items-center gap-3">
@@ -87,9 +83,12 @@ const SessionEditor: Component<SessionEditorProps> = (props) => {
             />
           </svg>
         </button>
-        <span class="text-sm font-inter font-medium text-secondary-color">
-          {formatDate(props.session.date)}
-        </span>
+        <input
+          type="date"
+          class="text-sm font-inter font-medium text-secondary-color bg-transparent outline-none border-none cursor-pointer"
+          value={props.session.date}
+          onChange={(e) => props.onUpdateDate(e.currentTarget.value)}
+        />
       </div>
 
       <For each={props.session.entries}>

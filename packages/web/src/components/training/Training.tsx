@@ -36,6 +36,7 @@ const Training: Component = () => {
           <SessionEditor
             session={session()}
             onBack={actions.clearActiveSession}
+            onUpdateDate={(date) => actions.updateSessionDate(session().id, date)}
             onAddExercise={actions.addExerciseEntry}
             onRemoveExercise={actions.removeExerciseEntry}
             onAddWeightSet={actions.addWeightSet}
