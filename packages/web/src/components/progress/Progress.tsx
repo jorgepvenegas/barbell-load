@@ -8,7 +8,10 @@ import {
   getExerciseMaxWeight,
   getExerciseTotalVolume,
   getCardioBestValue,
+  dataPointsToJSON,
+  dataPointsToCSV,
 } from "@barbell/shared";
+import { downloadFile } from "../../utils/download";
 
 const Progress: Component = () => {
   const store = useTrainingStore();
@@ -63,12 +66,75 @@ const Progress: Component = () => {
     return "s";
   });
 
+  const exportProgressJSON = () => {
+    const ex = exercise();
+    if (!ex) return;
+    const name = ex.name.toLowerCase().replace(/\s+/g, "-");
+    if (isWeight()) {
+      const combined = [
+        ...maxWeightData().map((p) => ({ ...p, metric: "max_weight" })),
+        ...volumeData().map((p) => ({ ...p, metric: "total_volume" })),
+      ];
+      downloadFile(
+        JSON.stringify({ exercise: ex.name, data: combined }, null, 2),
+        `progress-${name}.json`,
+        "application/json"
+      );
+    } else {
+      downloadFile(
+        dataPointsToJSON(cardioLabel(), cardioUnit(), cardioData()),
+        `progress-${name}.json`,
+        "application/json"
+      );
+    }
+  };
+
+  const exportProgressCSV = () => {
+    const ex = exercise();
+    if (!ex) return;
+    const name = ex.name.toLowerCase().replace(/\s+/g, "-");
+    if (isWeight()) {
+      const header = "date,metric,value";
+      const rows = [
+        ...maxWeightData().map((p) => `${p.date},max_weight (lb),${p.value}`),
+        ...volumeData().map((p) => `${p.date},total_volume (lb),${p.value}`),
+      ].sort();
+      downloadFile(
+        [header, ...rows].join("\n"),
+        `progress-${name}.csv`,
+        "text/csv"
+      );
+    } else {
+      downloadFile(
+        dataPointsToCSV(cardioLabel(), cardioUnit(), cardioData()),
+        `progress-${name}.csv`,
+        "text/csv"
+      );
+    }
+  };
+
   return (
     <Layout>
       <header class="flex items-center justify-between py-4">
         <h1 class="text-4xl font-bold font-jakarta text-primary-color">
           Progress
         </h1>
+        <Show when={exercisesWithData().length > 0}>
+          <div class="flex gap-2">
+            <button
+              class="text-xs font-inter font-medium px-3 py-1.5 rounded-lg bg-elevated text-secondary-color"
+              onClick={exportProgressJSON}
+            >
+              Export JSON
+            </button>
+            <button
+              class="text-xs font-inter font-medium px-3 py-1.5 rounded-lg bg-elevated text-secondary-color"
+              onClick={exportProgressCSV}
+            >
+              Export CSV
+            </button>
+          </div>
+        </Show>
       </header>
 
       <Show
