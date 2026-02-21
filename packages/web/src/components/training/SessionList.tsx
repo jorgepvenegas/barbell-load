@@ -1,5 +1,6 @@
 import { type Component, For, Show } from "solid-js";
-import { type TrainingSession, getExerciseById } from "@barbell/shared";
+import { type TrainingSession, getExerciseById, sessionsToJSON, sessionsToCSV } from "@barbell/shared";
+import { downloadFile } from "../../utils/download";
 
 interface SessionListProps {
   sessions: TrainingSession[];
@@ -17,6 +18,12 @@ const SessionList: Component<SessionListProps> = (props) => {
   const sorted = () =>
     [...props.sessions].sort((a, b) => b.date.localeCompare(a.date));
 
+  const exportJSON = () =>
+    downloadFile(sessionsToJSON(props.sessions), "training-sessions.json", "application/json");
+
+  const exportCSV = () =>
+    downloadFile(sessionsToCSV(props.sessions), "training-sessions.csv", "text/csv");
+
   return (
     <div class="flex flex-col gap-5">
       <button
@@ -30,9 +37,25 @@ const SessionList: Component<SessionListProps> = (props) => {
       </button>
 
       <Show when={sorted().length > 0}>
-        <h2 class="text-xl font-bold font-jakarta text-primary-color">
-          Past Sessions
-        </h2>
+        <div class="flex items-center justify-between">
+          <h2 class="text-xl font-bold font-jakarta text-primary-color">
+            Past Sessions
+          </h2>
+          <div class="flex gap-2">
+            <button
+              class="text-xs font-inter font-medium px-3 py-1.5 rounded-lg bg-elevated text-secondary-color"
+              onClick={exportJSON}
+            >
+              Export JSON
+            </button>
+            <button
+              class="text-xs font-inter font-medium px-3 py-1.5 rounded-lg bg-elevated text-secondary-color"
+              onClick={exportCSV}
+            >
+              Export CSV
+            </button>
+          </div>
+        </div>
         <div class="flex flex-col gap-3">
           <For each={sorted()}>
             {(session) => (
